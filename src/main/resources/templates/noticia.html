@@ -1,30 +1,40 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/fragments/head :: head"></head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pizarras del Sur - Inicio</title>
 
-<body>
-    <nav class="navbar d-flex justify-content-between">
-        <span style="width: 20% ;">
-            <a th:href="@{/}">
-                <img class="eggNews" src="../images/egg.png" alt="eggNews">
-            </a>
-        </span>
-        <button class="btn btn-warning">
-            <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
-        </button>
-    </nav>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/estilos.css">
+    </head>
 
-    <div>
-        <input hidden th:value="${noticia.id}" name="id">
+    <body>
+        <nav class="navbar d-flex justify-content-between">
+            <span style="width: 20% ;">
+                <a th:href="@{/}">
+                    <img class="eggNews" src="../images/egg.png" alt="eggNews">
+                </a>
+            </span>
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
+            </button>
+        </nav>
 
-        <h2 th:text="${noticia.titulo}"></h2>
-        <img th:src="@{'/imagenes/' + ${noticia.foto}}" class="img-fluid">
-        <p th:text="${noticia.cuerpo}"></p>
-        <p th:text="'Creador: ' + ${noticia.creador.nombreu}"></p>
-    </div>
-    <br>
-    <footer th:replace="/fragments/footer :: div"></footer>
-</body>
+        <div>
+            <input hidden th:value="${noticia.id}" name="id">
+
+            <h2 th:text="${noticia.titulo}"></h2>
+            <img th:src="@{'/imagenes/' + ${noticia.foto}}" class="img-fluid">
+            <p th:text="${noticia.cuerpo}"></p>
+            <p th:text="'Creador: ' + ${noticia.creador.nombreu}"></p>
+        </div>
+        <br>
+        <div class="footer">
+            <p>Copyright • Todos los derechos reservados • 2022</p>
+        </div>
+    </body>
 
 </html>
