@@ -7,16 +7,13 @@ package mauriNetwork.mauriPrueba.controladores;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/favicon.ico")
-public class FaviconControlador {
+public class FaviconController {
 
-    @GetMapping("/")
+    @GetMapping("favicon.ico")
     @ResponseBody
     void returnNoFavicon() {
     }
-
 }
