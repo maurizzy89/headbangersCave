@@ -55,7 +55,7 @@
         <div class="row mx-5">
             <div th:each="noticia:${noticias}" class="noticiaTarjeta">
                 <div class="card bg-black mt-1">
-                    <img th:src="@{'/imagenes/' + ${noticia.foto}}" alt="imagen de la noticia" class="card-img-top">
+                    <img th:src="@{'/subidas/' + ${noticia.foto}}" alt="imagen de la noticia" class="card-img-top">
                     <div class="card-body">
                         <h3 th:text="${noticia.titulo}"></h3>
                         <a th:href="@{/noticia/__${noticia.id}__}" class="btn btn-secondary">Ver Noticia</a><br>

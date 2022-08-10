@@ -98,10 +98,10 @@ public class PortalControlador {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         if (!file.isEmpty()) {
-            String ruta = "C:\\Users\\Maurizzy\\Desktop\\Curso Egg\\Modulo 5 -Spring\\18 - Spring - MVC\\Ejercicio\\1\\imagenes";
+            String ruta = "./src/main/resources/static/subidas";
             try {
                 byte[] bytesFoto = file.getBytes();
-                Path rutaAbsoluta = Paths.get(ruta + "//" + file.getOriginalFilename());
+                Path rutaAbsoluta = Paths.get(ruta + "/" + file.getOriginalFilename());
                 Files.write(rutaAbsoluta, bytesFoto);
             } catch (IOException ex) {
                 modelo.put("error", ex.getMessage());

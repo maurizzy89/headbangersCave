@@ -10,7 +10,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
-        registry.addResourceHandler("/imagenes/**").addResourceLocations("file:C:/Users/Maurizzy/Desktop/Curso Egg/Modulo 5 -Spring/18 - Spring - MVC/Ejercicio/1/imagenes/");
+        registry.addResourceHandler("/subidas/**").addResourceLocations("file:./src/main/resources/static/subidas/");
     }
     
     
