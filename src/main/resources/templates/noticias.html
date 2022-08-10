@@ -1,0 +1,66 @@
+    <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <span style="width: 20% ;">
+            <a th:href="@{/}">
+                <img class="eggNews" src="../images/egg.png" alt="eggNews">
+            </a>
+        </span>
+        
+        <div style="text-align: center">
+            <button class="btn btn-warning" sec:authorize="hasAnyRole('PERIODISTA', 'ADMIN')">
+                <a class="text-decoration-none text-dark" th:href="@{/crear}">Registrar Noticia</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','PERIODISTA')">
+                <a class="text-decoration-none text-dark" th:href="@{/perfil/__${nombreLogueado}__}">Tu Perfil</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="hasRole('ADMIN')">
+                <a class="text-decoration-none text-dark" th:href="@{/admin/registrar_periodista}">Registrar
+                    Periodista</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="hasRole('ADMIN')">
+                <a class="text-decoration-none text-dark" th:href="@{/admin/lista_periodistas}">Lista de
+                    Periodistas</a>
+            </button>
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/logout}">Logout</a>
+            </button>
+        </div>
+    </nav>
+
+    <div th:if="${exito != null}" class="card text-white bg-transparent mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">�xito</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+
+    <div class="title-text-center py-5">
+        <h2 class="reesplandor"
+            th:text="'Hola ' + ${session.usuariosession.nombreu} + '!, estas son las �ltimas noticias'"></h2>
+    </div>
+
+    <div class="row mx-5">
+        <div th:each="noticia:${noticias}" class="noticiaTarjeta">
+            <div class="card bg-black mt-1">
+                <img th:src="@{'/imagenes/' + ${noticia.foto}}" alt="imagen de la noticia" class="card-img-top">
+                <div class="card-body">
+                    <h3 th:text="${noticia.titulo}"></h3>
+                    <a th:href="@{/noticia/__${noticia.id}__}" class="btn btn-secondary">Ver Noticia</a><br>
+                    <a th:href="@{/editar/__${noticia.id}__}" class="btn btn-secondary"
+                        sec:authorize="hasAnyRole('PERIODISTA', 'ADMIN')">Editar Noticia</a><br>
+                    <a th:href="@{/__${noticia.id}__}" class="btn btn-danger" sec:authorize="hasRole('ADMIN')">Eliminar
+                        Noticia</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/fragments/footer :: div"></footer>
+
+</body>
+
+</html>

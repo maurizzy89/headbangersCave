@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <span style="width: 20% ;">
+            <a th:href="@{/}">
+                <img class="eggNews" src="../images/egg.png" alt="eggNews">
+            </a>
+        </span>
+        <button class="btn btn-warning">
+            <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
+        </button>
+    </nav>
+
+    <div class="reesplandor">
+        <br>
+        <p th:text="'Nombre de usuario:.................' + ${usuario.nombreu}"></p>
+        <p th:text="'Fecha de Alta:.................' + ${usuario.fechalta}"></p>
+        <p th:text="'Rol:.................' + ${usuario.rol}"></p>
+        <p sec:authorize="hasRole('PERIODISTA')" th:text="'Sueldo mensual:.................' + ${usuario.sueldoMensual}"></p>
+        <p sec:authorize="hasRole('PERIODISTA')">Noticias creadas:</p>
+        <div sec:authorize="hasRole('PERIODISTA')" th:each="noticia:${usuario.noticiasPeriodista}">
+            <p th:text="${noticia.titulo}"></p>
+        </div>
+
+    </div>
+    <footer th:replace="/fragments/footer :: div"></footer>
+</body>
+
+</html>

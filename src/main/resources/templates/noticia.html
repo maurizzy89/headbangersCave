@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <span style="width: 20% ;">
+            <a th:href="@{/}">
+                <img class="eggNews" src="../images/egg.png" alt="eggNews">
+            </a>
+        </span>
+        <button class="btn btn-warning">
+            <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
+        </button>
+    </nav>
+
+    <div>
+        <input hidden th:value="${noticia.id}" name="id">
+
+        <h2 th:text="${noticia.titulo}"></h2>
+        <img th:src="@{'/imagenes/' + ${noticia.foto}}" class="img-fluid">
+        <p th:text="${noticia.cuerpo}"></p>
+        <p th:text="'Creador: ' + ${noticia.creador.nombreu}"></p>
+    </div>
+    <br>
+    <footer th:replace="/fragments/footer :: div"></footer>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body>
+        <nav class="navbar d-flex justify-content-between">
+            <span style="width: 20%;">
+                <a th:href="@{/}">
+                    <img class="eggNews" src="../images/egg.png" alt="eggNews">
+                </a>
+            </span>
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
+            </button>
+        </nav>
+
+        <h2 class="reesplandor">Formulario de Noticia</h2>
+        <br>
+        <div>
+            <form th:action="@{/guardar}" method="POST" enctype="multipart/form-data" th:object="${noticia}">
+
+                <input type="hidden" name="id" th:field="*{id}">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Titulo" name="titulo" th:field="*{titulo}">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Cuerpo" name="cuerpo" th:field="*{cuerpo}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="file" class="form-control" name="file">
+                </div>
+                <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+
+                <br>
+                <br>
+
+                <div th:if="${error != null}" class="card text-white bg-transparent mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <footer th:replace="/fragments/footer :: div"></footer>
+    </body>
+
+</html>

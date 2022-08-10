@@ -1,0 +1,59 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav class="navbar bg-dark d-flex justify-content-between">
+        <a class="text-decoration-none text-white h2" th:href="@{/}">Egg News</a>
+        <button class="btn btn-warning">
+            <a class="text-decoration-none text-dark" th:href="@{/}">Volver</a>
+        </button>
+    </nav>
+
+    <div class="container-fluid m-5 contenedor">
+        <form th:action="@{admin/registro_periodista}" method="POST" class="formulario">
+
+            <div class="form-group my-3">
+                <h3 class="card-title">Registrar periodista</h3>
+            </div>
+            <div class="form-group my-3">
+                <input type="text" class="form-control" placeholder="Nombre de Usuario" name="nombreu"
+                    th:value="${nombreu}">
+            </div>
+            <div class="form-group my-3">
+                <input type="password" class="form-control" placeholder="Contraseña" name="password">
+            </div>
+            <div class="form-group my-3">
+                <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2">
+            </div>
+            <div class="form-group my-3">
+                <input type="number" class="form-control" placeholder="Sueldo Mensual" name="sueldoMensual"
+                    sec:authorize="hasRole('ADMIN')">
+            </div>
+            <div class="form-group my-3">
+                <input type="hidden" class="form-control" name="cantidadNoticias" th:value="0"
+                    sec:authorize="hasRole('ADMIN')">
+            </div>
+            <div class="form-group my-3">
+                <input type="hidden" class="form-control" name="alta" th:value="true" sec:authorize="hasRole('ADMIN')">
+            </div>
+            <div class="form-group my-3">
+                <input type="hidden" class="form-control" name="rol" th:value="PERIODISTA"
+                    sec:authorize="hasRole('ADMIN')">
+            </div>
+            <button type="submit" name="registro" class="btn btn-light mt-3 botones">Registrar</button>
+
+        </form>
+
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

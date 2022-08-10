@@ -1,0 +1,34 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <span style="width: 20% ;">
+            <a th:href="@{/}">
+                <img class="eggNews" src="../images/egg.png" alt="eggNews">
+            </a>
+        </span>
+        <div style="text-align: center">
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/registrar}">Registrarme</a>
+            </button>
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
+            </button>
+        </div>
+    </nav>
+
+
+    <div th:if="${exito != null}" class="card text-white bg-transparent mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">Éxito</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+
+    <footer th:replace="/fragments/footer :: div"></footer>
+</body>
+
+</html>
