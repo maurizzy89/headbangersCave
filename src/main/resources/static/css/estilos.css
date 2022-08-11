@@ -55,8 +55,14 @@ body {
     max-width: 400px;
 }
 
-.eggNews {
-    width: 50%;
-    height: 10%;
+.pizarrasLogo {
+    width: 10%;
+}
+
+.navbarBotones {
+    position:absolute;
+    margin-top: 20px;
+    top:0; 
+    right:0;
 }
 
