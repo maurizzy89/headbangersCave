@@ -1,43 +1,45 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizarras del Sur - Inicio</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/estilos.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pizarras del Sur - Inicio</title>
 
-<body>
-    <nav>
-        <span>
-            <a th:href="@{/}">
-                <img class="pizarrasLogo" src="../images/pizarrasLogo.png" alt="pizarrasdelsur">
-            </a>
-        </span>
-        <button class="btn btn-warning">
-            <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
-        </button>
-    </nav>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/estilos.css">
+    </head>
 
-    <div class="reesplandor">
-        <br>
-        <p th:text="'Nombre de usuario:.................' + ${usuario.nombreu}"></p>
-        <p th:text="'Fecha de Alta:.................' + ${usuario.fechalta}"></p>
-        <p th:text="'Rol:.................' + ${usuario.rol}"></p>
-        <p sec:authorize="hasRole('PERIODISTA')" th:text="'Sueldo mensual:.................' + ${usuario.sueldoMensual}"></p>
-        <p sec:authorize="hasRole('PERIODISTA')">Noticias creadas:</p>
-        <div sec:authorize="hasRole('PERIODISTA')" th:each="noticia:${usuario.noticiasPeriodista}">
-            <p th:text="${noticia.titulo}"></p>
+    <body>
+        <nav>
+            <span>
+                <a th:href="@{/}">
+                    <img class="pizarrasLogo" src="../images/pizarrasLogo.png" alt="pizarrasdelsur">
+                </a>
+            </span>
+            <div class="navbarBotones">
+                <button class="btn btn-warning">
+                    <a class="text-decoration-none text-dark" th:href="@{/noticias}">Volver</a>
+                </button>
+            </div>
+        </nav>
+
+        <div class="reesplandor">
+            <br>
+            <p th:text="'Nombre de usuario:.................' + ${usuario.nombreu}"></p>
+            <p th:text="'Fecha de Alta:.................' + ${usuario.fechalta}"></p>
+            <p th:text="'Rol:.................' + ${usuario.rol}"></p>
+            <p sec:authorize="hasRole('PERIODISTA')" th:text="'Sueldo mensual:.................' + ${usuario.sueldoMensual}"></p>
+            <p sec:authorize="hasRole('PERIODISTA')">Noticias creadas:</p>
+            <div sec:authorize="hasRole('PERIODISTA')" th:each="noticia:${usuario.noticiasPeriodista}">
+                <p th:text="${noticia.titulo}"></p>
+            </div>
+
         </div>
-
-    </div>
-<div class="footer">
-    <p>Copyright • Todos los derechos reservados • 2022</p>
-</div>
-</body>
+        <div class="footer">
+            <p>Copyright • Todos los derechos reservados • 2022</p>
+        </div>
+    </body>
 
 </html>

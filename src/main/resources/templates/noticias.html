@@ -19,7 +19,7 @@
                 </a>
             </span>
 
-            <div style="text-align: center">
+            <div style="text-align: center" class="navbarBotones">
                 <button class="btn btn-warning" sec:authorize="hasAnyRole('PERIODISTA', 'ADMIN')">
                     <a class="text-decoration-none text-dark" th:href="@{/crear}">Registrar Noticia</a>
                 </button>
