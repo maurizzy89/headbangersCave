@@ -32,6 +32,11 @@ public class PortalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    void returnNoFavicon() {
+    }
+
     @GetMapping("/")
     public String index() {
         return "index.html";
