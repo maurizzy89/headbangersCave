@@ -40,11 +40,10 @@
         <div class="reesplandor">
             <p th:text="'Nombre de usuario: ' + ${usuario.nombreu}"></p>
 
-            <div sec:authorize="hasAnyRole('USER','ADMIN')">
-                <div th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}">
+                <div sec:authorize="hasAnyRole('USER','ADMIN')">
                     <form th:action="@{/usuario/modificarNombreDeUsuario}" method="POST" class="formulario">
                         <div sec:authorize="hasAnyRole('USER','ADMIN')">
-                            <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'admin'}"><input type="text" class="form-control" placeholder="Modifica tu nombre de usuario" name="nombreu"><button type="submit" name="modificarNombreDeUsuario">Modificar</button></p>
+                            <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}"><input type="text" class="form-control" placeholder="Modifica tu nombre de usuario" name="nombreu"><button type="submit" name="modificarNombreDeUsuario">Modificar</button></p>
                             <div th:if="${exitoNombre != null}" class="card text-white bg-transparent mb-3 mensajeError">
                                 <div class="card-body">
                                     <h5 class="card-title">Exito</h5>
@@ -60,7 +59,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
             <br>
             <p th:text="'Imagen de perfil'"></p>
             <img th:src="@{'/perfiles/' + ${usuario.foto}}" alt='foto de perfil' class="card-img-top" style="width: 20%" >
