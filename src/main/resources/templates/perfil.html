@@ -41,7 +41,7 @@
             <p th:text="'Nombre de usuario: ' + ${usuario.nombreu}"></p>
 
             <div sec:authorize="hasAnyRole('USER','ADMIN')">
-                <div th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'admin'}">
+                <div th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}">
                     <form th:action="@{/usuario/modificarNombreDeUsuario}" method="POST" class="formulario">
                         <div sec:authorize="hasAnyRole('USER','ADMIN')">
                             <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'admin'}"><input type="text" class="form-control" placeholder="Modifica tu nombre de usuario" name="nombreu"><button type="submit" name="modificarNombreDeUsuario">Modificar</button></p>
@@ -67,7 +67,7 @@
             <div sec:authorize="hasAnyRole('USER','ADMIN')">
                 <form th:action="@{/usuario/modificarImagenDePerfil}" method="POST" enctype="multipart/form-data" class="formulario">
                     <div sec:authorize="hasAnyRole('USER','ADMIN')">
-                        <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'admin'}"><input type="file" class="form-control" placeholder="modifica tu foto de perfil" name="file"><button type="submit" name="modificarImagenDePerfil">Modificar</button></p>
+                        <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}"><input type="file" class="form-control" placeholder="modifica tu foto de perfil" name="file"><button type="submit" name="modificarImagenDePerfil">Modificar</button></p>
                         <div th:if="${exitoImagen != null}" class="card text-white bg-transparent mb-3 mensajeError">
                             <div class="card-body">
                                 <h5 class="card-title">Exito</h5>
