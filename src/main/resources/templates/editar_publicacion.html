@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Headbangers Cave - Editar Publicacion</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/estilos.css">
+    </head>
+
+    <body>
+        <nav>
+            <span>
+                <a th:href="@{/usuario/dashboard}">
+                    <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
+                </a>
+            </span>
+            <div class="navbarBotones">
+                <button class="btn btn-warning">
+                    <a class="text-decoration-none text-dark" th:href="@{/usuario/dashboard}">Volver</a>
+                </button>
+            </div>
+        </nav>
+        
+        <h2 class="reesplandor">Editar Publicacion</h2>
+        <br>
+        <div>
+            <form th:action="@{/guardar_editada}" method="POST" enctype="multipart/form-data" th:object="${publicacion}">
+
+                <input type="hidden" name="id" th:field="*{id}">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Titulo" name="titulo" th:field="*{titulo}">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Comentario" name="comentario" th:field="*{comentario}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Tu link" name="link" th:field="*{link}">
+                </div>
+
+                <button type="submit" name="guardar" class="btn btn-primary">Guardar edición</button>
+
+                <br>
+                <br>
+
+                <div th:if="${error != null}" class="card text-white bg-transparent mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+            </form>
+
+
+    </body>
+
+</html>

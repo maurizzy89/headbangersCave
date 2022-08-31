@@ -1,44 +1,31 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizarras Artesanales</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/estilos.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>\ \ \ \ \ Headbangers Cave / / / / /</title>
 
-<body>
-    <nav>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/estilos.css">
+    </head>
+
+    <body>
         <span>
-            <a th:href="@{/}" >
-                <img class="pizarrasLogo" src="../images/pizarrasLogo.png" alt="pizarrasdelsur">
+            <a th:href="@{/publicaciones}" >
+                <img class="logoBienvenida" src="../images/headbangersLogo.png" alt="Bienvenido a headbangers cave">
             </a>
         </span>
-        <div class="navbarBotones">
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" th:href="@{/registrar}">Registrarme</a>
-            </button>
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
-            </button>
+
+
+        <h1 class="reesplandor" style="text-align: center">
+            Toca la imagen para acceder
+        </h1>
+        
+        <div class="footer">
+            <p>Copyright • Todos los derechos reservados • 2022</p>
         </div>
-    </nav>
-
-
-    <div th:if="${exito != null}" class="card text-white bg-transparent mb-3 mt-3 mensajeExito">
-        <div class="card-body">
-            <h5 class="card-title">Éxito</h5>
-            <p class="card-text" th:text="${exito}"></p>
-        </div>
-    </div>
-
-<div class="footer">
-    <p>Copyright • Todos los derechos reservados • 2022</p>
-</div>
-</body>
+    </body>
 
 </html>

@@ -13,23 +13,24 @@
     <body>
         <nav>
             <span>
-                <a th:href="@{/}">
-                    <img class="pizarrasLogo" src="../images/pizarrasLogo.png" alt="pizarrasdelsur">
+                <a th:href="@{/publicaciones}">
+                    <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
                 </a>
             </span>
             <div class="navbarBotones">
                 <button class="btn btn-warning">
-                    <a class="text-decoration-none text-dark" th:href="@{/}">Volver</a>
+                    <a class="text-decoration-none text-dark" th:href="@{/publicaciones}">Volver</a>
                 </button>
             </div>
         </nav>
 
         <div>
-            <form th:action="@{/registro}" method="POST" class="formulario">
+            <form th:action="@{/registro}" method="POST" enctype="multipart/form-data" class="formulario">
 
                 <div class="form-group my-3">
                     <h3 class="reesplandor">Registrate</h3>
                 </div>
+
                 <div class="form-group my-3">
                     <input type="text" class="form-control" placeholder="Nombre de Usuario" name="nombreu"
                            th:value="${nombreu}">
@@ -39,6 +40,9 @@
                 </div>
                 <div class="form-group my-3">
                     <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2">
+                </div>
+                <div class="form-group my-3">
+                    <input type="file" class="form-control" placeholder="sube tu foto de perfil" name="file">
                 </div>
                 <button type="submit" name="registro" class="btn btn-light mt-3 botones">Registrarme</button>
 
