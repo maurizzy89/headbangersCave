@@ -61,10 +61,8 @@ public class UsuarioControlador {
         }
     }
 
-    @PostMapping("/modificarImagenDePerfil")
-    public String modificarImagenDePerfil(HttpSession session, @RequestParam(name = "file") MultipartFile file, ModelMap modelo) throws IOException {
-        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-
+    @PostMapping("/modificarImagenDePerfil/{id}")
+    public String modificarImagenDePerfil(@PathVariable Long id, @RequestParam(name = "file") MultipartFile file, ModelMap modelo) throws IOException {
         try {
             String ruta = "./src/main/resources/static/perfiles";
             byte[] bytesFoto = file.getBytes();
@@ -72,37 +70,36 @@ public class UsuarioControlador {
             Files.write(rutaAbsoluta, bytesFoto);
 
             String fotoNombre = file.getOriginalFilename();
-            usuarioServicio.modificarImagenDePerfil(logueado.getId(), fotoNombre);
+            usuarioServicio.modificarImagenDePerfil(id, fotoNombre);
             modelo.put("exitoImagen", "La imagen de perfil fue cambiada");
-            modelo.put("usuario", usuarioServicio.getReferenceById(logueado.getId()));
-            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(logueado.getId());
+            modelo.put("usuario", usuarioServicio.getReferenceById(id));
+            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
             return "perfil.html";
-        } catch (Exception e) {
+        } catch (IOException e) {
             modelo.put("errorImagen", "No cargaste ninguna imagen ");
-            modelo.put("usuario", usuarioServicio.getReferenceById(logueado.getId()));
-            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(logueado.getId());
+            modelo.put("usuario", usuarioServicio.getReferenceById(id));
+            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
             return "perfil.html";
         }
     }
 
-    @PostMapping("/modificarNombreDeUsuario")
-    public String modificarNombreDeUsuario(HttpSession session,
-            @RequestParam(name = "nombreu") String nombreu, ModelMap modelo) throws IOException {
+    @PostMapping("/modificarNombreDeUsuario/{id}")
+    public String modificarNombreDeUsuario(@PathVariable Long id, HttpSession session, @RequestParam(name = "nombreu") String nombreu, ModelMap modelo) throws IOException {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
         try {
-            usuarioServicio.modificarNombreDeUsuario(logueado.getId(), nombreu);
+            usuarioServicio.modificarNombreDeUsuario(id, nombreu);
             logueado.setNombreu(nombreu);
             modelo.put("exitoNombre", "El nombre de usuario fue cambiado");
             modelo.put("usuario", usuarioServicio.getReferenceById(logueado.getId()));
-            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(logueado.getId());
+            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
             return "perfil.html";
         } catch (Exception e) {
             modelo.put("errorNombre", "El nombre de usuario que pusiste ya esta en uso");
             modelo.put("usuario", usuarioServicio.getReferenceById(logueado.getId()));
-            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(logueado.getId());
+            List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
             return "perfil.html";
         }
