@@ -69,7 +69,7 @@
 
                         <a  class="btn btn-light"  th:href="@{${publicacion.link}}" target="_blank">Ir al enlace</a>
                         <span sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-light"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu or session.usuariosession.nombreu == 'admin'}">Editar Publicación</a><br>
+                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-light"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}">Editar Publicación</a><br>
                             <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu or session.usuariosession.nombreu == 'admin'}">Eliminar Publicación</a><br>
                         </span>
                     </div>
