@@ -61,6 +61,7 @@ text-align: center;
 }
 
 .publicacionTarjeta {
+    align-items: left;
     box-shadow: inset 0 0 5px white, 0 0 40px white;
     border-radius: 20px;
     max-width: 400px;

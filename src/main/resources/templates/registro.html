@@ -42,10 +42,9 @@
                     <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2">
                 </div>
                 <div class="form-group my-3">
-                    <input type="file" class="form-control" placeholder="sube tu foto de perfil" name="file">
-                </div>
+                    <input type="file" class="form-control" placeholder="sube tu foto de perfil" name="multipartFile">
+                </div>       
                 <button type="submit" name="registro" class="btn btn-light mt-3 botones">Registrarme</button>
-
             </form>
             <br>
             <div th:if="${error != null}" class="card text-white bg-transparent mb-3 mensajeError">

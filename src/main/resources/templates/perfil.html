@@ -40,28 +40,30 @@
         <div class="reesplandor">
             <p th:text="${usuario.nombreu}" style='text-align: center'></p>
 
-                <div sec:authorize="hasAnyRole('USER','ADMIN')">
-                    <form th:action="@{/usuario/modificarNombreDeUsuario/__${usuario.id}__}" method="POST" class="formulario">
-                        <div sec:authorize="hasAnyRole('USER','ADMIN')">
-                            <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}"><input type="text" class="form-control" placeholder="Modifica tu nombre de usuario" name="nombreu"><button type="submit" name="modificarNombreDeUsuario">Modificar</button></p>
-                            <div th:if="${exitoNombre != null}" class="card text-white bg-transparent mb-3 mensajeError">
-                                <div class="card-body">
-                                    <h5 class="card-title">Exito</h5>
-                                    <p class="card-text" th:text="${exitoNombre}"></p>
-                                </div>
-                            </div>
-                            <div th:if="${errorNombre != null}" class="card text-white bg-transparent mb-3 mensajeError">
-                                <div class="card-body">
-                                    <h5 class="card-title">Que gil que sos...</h5>
-                                    <p class="card-text" th:text="${errorNombre}"></p>
-                                </div>
+            <div sec:authorize="hasAnyRole('USER','ADMIN')">
+                <form th:action="@{/usuario/modificarNombreDeUsuario/__${usuario.id}__}" method="POST" class="formulario">
+                    <div sec:authorize="hasAnyRole('USER','ADMIN')">
+                        <p th:if="${session.usuariosession.nombreu == usuario.nombreu or session.usuariosession.nombreu == 'mauriAdmin'}"><input type="text" class="form-control" placeholder="Modifica tu nombre de usuario" name="nombreu"><button type="submit" name="modificarNombreDeUsuario">Modificar</button></p>
+                        <div th:if="${exitoNombre != null}" class="card text-white bg-transparent mb-3 mensajeError">
+                            <div class="card-body">
+                                <h5 class="card-title">Exito</h5>
+                                <p class="card-text" th:text="${exitoNombre}"></p>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div th:if="${errorNombre != null}" class="card text-white bg-transparent mb-3 mensajeError">
+                            <div class="card-body">
+                                <h5 class="card-title">Que gil que sos...</h5>
+                                <p class="card-text" th:text="${errorNombre}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <br>
             <p th:text="'Imagen de perfil'"></p>
-            <img th:src="@{'/perfiles/' + ${usuario.foto}}" alt='foto de perfil' class="card-img-top" style="width: 20%" >
+            <a th:href="${usuario.imagen.imagenUrl}">
+                <img class="publicacionTarjeta" th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
+            </a>
             <div sec:authorize="hasAnyRole('USER','ADMIN')">
                 <form th:action="@{/usuario/modificarImagenDePerfil/__${usuario.id}__}" method="POST" enctype="multipart/form-data" class="formulario">
                     <div sec:authorize="hasAnyRole('USER','ADMIN')">
@@ -90,7 +92,7 @@
                 <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
                     <div class="card bg-black mt-1">
                         <div class="card-body">
-                            <img class="publicacionTarjeta" th:src="@{'/perfiles/' + ${publicacion.creador.foto}}" alt='foto de perfil' style="width: 30%" align='right'>
+                            <img class="publicacionTarjeta" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
                             <h3 th:text="${publicacion.creador.nombreu}"></h3>
                             <h6 th:text="${publicacion.fecha}"></h6>                           
 

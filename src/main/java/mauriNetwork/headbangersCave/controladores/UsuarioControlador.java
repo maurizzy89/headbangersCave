@@ -64,13 +64,8 @@ public class UsuarioControlador {
     @PostMapping("/modificarImagenDePerfil/{id}")
     public String modificarImagenDePerfil(@PathVariable Long id, @RequestParam(name = "file") MultipartFile file, ModelMap modelo) throws IOException {
         try {
-            String ruta = "./src/main/resources/static/perfiles";
-            byte[] bytesFoto = file.getBytes();
-            Path rutaAbsoluta = Paths.get(ruta + "/" + file.getOriginalFilename());
-            Files.write(rutaAbsoluta, bytesFoto);
-
-            String fotoNombre = file.getOriginalFilename();
-            usuarioServicio.modificarImagenDePerfil(id, fotoNombre);
+           
+            usuarioServicio.modificarImagenDePerfil(id, imagen);
             modelo.put("exitoImagen", "La imagen de perfil fue cambiada");
             modelo.put("usuario", usuarioServicio.getReferenceById(id));
             List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);

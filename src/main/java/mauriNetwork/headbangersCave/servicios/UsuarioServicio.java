@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import mauriNetwork.headbangersCave.entidades.Imagen;
 import mauriNetwork.headbangersCave.entidades.Publicacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,34 +32,34 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     public PublicacionServicio publicacionServicio;
 
-    public Usuario registrar(String nombreu, String password, String password2, String fotoNombre) throws MyException {
+    public Usuario registrar(String nombreu, String password, String password2, Imagen imagen) throws MyException {
         validar(nombreu, password, password2);
 
         Usuario usuario = new Usuario();
         usuario.setNombreu(nombreu);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setFechalta(new Date());
-        usuario.setFoto(fotoNombre);
+        usuario.setImagen(imagen);
 
         return usuario;
     }
 
     @Transactional
-    public void guardarUsuario(String nombreu, String password, String password2, String fotoNombre) throws MyException {
-        Usuario usuario = registrar(nombreu, password, password2, fotoNombre);
+    public void guardarUsuario(String nombreu, String password, String password2, Imagen imagen) throws MyException {
+        Usuario usuario = registrar(nombreu, password, password2, imagen);
         usuario.setRol(Rol.USER);
 
         usuarioRepositorio.save(usuario);
     }
 
     @Transactional
-    public void modificarImagenDePerfil(Long id, String foto) {
+    public void modificarImagenDePerfil(Long id, Imagen imagen) {
         Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(id);
 
         if (respuestaUsuario.isPresent()) {
             Usuario usuario = respuestaUsuario.get();
 
-            usuario.setFoto(foto);
+            usuario.setImagen(imagen);
 
             usuarioRepositorio.save(usuario);
         }

@@ -61,7 +61,7 @@
             <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
                 <div class="card bg-black mt-1">
                     <div class="card-body">
-                        <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}"><img class="publicacionTarjeta" th:src="@{'/perfiles/' + ${publicacion.creador.foto}}" alt='foto de perfil' style="width: 30%" align='right'></a>
+                        <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}"><img class="publicacionTarjeta" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'></a>
                         <h3 th:text="${publicacion.creador.nombreu}"></h3>
                         <h6 th:text="${publicacion.fecha}"></h6>                           
                         <h3 th:text="${publicacion.titulo}"></h3>
