@@ -7,9 +7,6 @@ import mauriNetwork.headbangersCave.excepciones.MyException;
 import mauriNetwork.headbangersCave.servicios.PublicacionServicio;
 import mauriNetwork.headbangersCave.servicios.UsuarioServicio;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -18,8 +15,6 @@ import mauriNetwork.headbangersCave.entidades.Imagen;
 import mauriNetwork.headbangersCave.servicios.CloudinaryService;
 import mauriNetwork.headbangersCave.servicios.ImagenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,23 +33,10 @@ public class PortalControlador {
     private PublicacionServicio publicacionServicio;
     @Autowired
     private UsuarioServicio usuarioServicio;
-
     @Autowired
     private CloudinaryService cloudinaryService;
-
     @Autowired
     private ImagenService imagenService;
-
-    @PostMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable("id") int id) throws IOException {
-        if (!imagenService.exists(id)) {
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
-        }
-        Imagen imagen = imagenService.getOne(id).get();
-        Map result = cloudinaryService.delete(imagen.getImagenId());
-        imagenService.delete(id);
-        return new ResponseEntity("imagen eliminada", HttpStatus.OK);
-    }
 
     @GetMapping("favicon.ico")
     @ResponseBody
@@ -75,20 +57,30 @@ public class PortalControlador {
     public String registro(@RequestParam(name = "multipartFile") MultipartFile multipartFile, @RequestParam(name = "nombreu") String nombreu, @RequestParam(name = "password") String password, @RequestParam(name = "password2") String password2, ModelMap modelo) throws MyException, IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
         if (bi == null) {
-            return "registro.html";
-        }
-        Map result = cloudinaryService.upload(multipartFile);
-        Imagen imagen
-                = new Imagen(result.get("original_filename").toString(),
-                             result.get("url").toString(),
-                             result.get("public_id").toString());
-        imagenService.save(imagen);
+            try {
+                usuarioServicio.guardarUsuario(nombreu, password, password2, null);
+                modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
+                List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
+                modelo.addAttribute("publicaciones", ultimasPublicaciones);
+                return "publicaciones.html";
+            } catch (MyException e) {
+                modelo.put("error", e.getMessage());
+                return "registro.html";
+            }
 
-        usuarioServicio.guardarUsuario(nombreu, password, password2, imagen);
-        modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
-        List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
-        modelo.addAttribute("publicaciones", ultimasPublicaciones);
-        return "publicaciones.html";
+        } else {
+            Map result = cloudinaryService.upload(multipartFile);
+            Imagen imagen
+                    = new Imagen(result.get("original_filename").toString(),
+                            result.get("url").toString(),
+                            result.get("public_id").toString());
+            imagenService.save(imagen);
+            usuarioServicio.guardarUsuario(nombreu, password, password2, imagen);
+            modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
+            List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
+            modelo.addAttribute("publicaciones", ultimasPublicaciones);
+            return "publicaciones.html";
+        }
     }
 
     @GetMapping("/login")

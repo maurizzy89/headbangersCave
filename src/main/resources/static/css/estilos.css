@@ -1,11 +1,17 @@
-body {
-    background-image: url('/images/fuego.jpg');
+body{
+    background-image: url('/images/megadeth2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#fondoBienvenida{
+    background-image: url('/images/megadeth1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .titulo{
-text-align: center;
+    text-align: center;
     color: black;
     margin: 0;
     font-size: 25px;
@@ -61,19 +67,35 @@ text-align: center;
 }
 
 .publicacionTarjeta {
-    align-items: left;
-    box-shadow: inset 0 0 5px white, 0 0 40px white;
     border-radius: 20px;
-    max-width: 400px;
+    max-width: 1000px;
+    padding-bottom: 18px;
 }
 
+#tarjeta{
+    box-shadow: inset 0 0 5px green, 0 0 25px orange;
+}
+
+
 .headbangersLogo {
-    width: 18%;
+    width: 20%;
 }
 
 .logoBienvenida{
-        width: 100%;
+    margin-top: 70px;
+    margin-left: 5px;
+    width: 35%;
+}
 
+.scroll{
+    margin-top: 40px;
+    overflow-y: scroll;
+    height: 762px;
+    width: 70%;
+}
+
+.scroll::-webkit-scrollbar{
+    width: 70px;
 }
 
 .navbarBotones {
@@ -83,3 +105,22 @@ text-align: center;
     right:0;
 }
 
+.temblor{
+}
+@-webkit-keyframes animar{
+    0%{-webkit-transform:translate(0px,0px);}
+    10%{-webkit-transform:translate(40px,40px);}
+    20%{-webkit-transform:translate(0px,0px);}
+    30%{-webkit-transform:translate(40px,40px);}
+    40%{-webkit-transform:translate(0px,0px);}
+    50%{-webkit-transform:translate(40px,40px);}
+    60%{-webkit-transform:translate(0px,0px);}
+    70%{-webkit-transform:translate(40px,40px);}
+    80%{-webkit-transform:translate(0px,0px);}
+    90%{-webkit-transform:translate(40px,40px);}
+    100%{-webkit-transform:translate(0px,0px);}
+}
+
+.temblor:hover{
+    -webkit-animation: animar 0.2s 1;
+}

@@ -19,5 +19,5 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT u FROM Usuario u ORDER BY u.id DESC")
     public List<Usuario> listarUsuarios();
-
+    
 }

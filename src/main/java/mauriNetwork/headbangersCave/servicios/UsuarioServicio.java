@@ -78,6 +78,19 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
+    @Transactional
+    public void eliminarImagen(Long idUsuario) {
+        Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
+
+        if (respuestaUsuario.isPresent()) {
+            Usuario usuario = respuestaUsuario.get();
+
+            usuario.setImagen(null);
+
+            usuarioRepositorio.save(usuario);
+        }
+    }
+
     private void validar(String nombreu, String password, String password2) throws MyException {
         if (nombreu.isEmpty() || nombreu == null) {
             throw new MyException("El nombre no puede estar vacio");
@@ -133,8 +146,8 @@ public class UsuarioServicio implements UserDetailsService {
 
         return publicacionesCreador;
     }
-    
-    public void eliminarUsuario(Long id){
+
+    public void eliminarUsuario(Long id) {
         usuarioRepositorio.deleteById(id);
     }
 }

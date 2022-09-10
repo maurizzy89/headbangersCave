@@ -26,9 +26,15 @@
         <div th:each="usuario:${usuarios}" class="publicacionTarjeta">
             <div class="card bg-black mt-1">
                 <div class="card-body">
-                    <a th:href="${usuario.imagen.imagenUrl}">
-                        <img class="publicacionTarjeta" th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
-                    </a>
+                    <div th:if="${usuario.imagen == null}">
+                        <img class="publicacionTarjeta" style="width: 30%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                    </div>
+                    <div th:unless="${usuario.imagen == null}">
+                        <a th:href="@{/usuario/perfil/__${usuario.id}__}">
+                            <img class="publicacionTarjeta" th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
+                        </a>
+                    </div>
+
                     <h3 th:text="${usuario.nombreu}"></h3>
                     <h6 th:text="${usuario.fechalta}"></h6>                           
                     <button class="btn btn-warning">
