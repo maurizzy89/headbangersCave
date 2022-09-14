@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Headbangers Cave - Miembros Registrados</title>
+    <div th:replace="fragments/head.html"></div>
+    <title>Headbangers Cave - Miembros Registrados</title>
+</head>
+<body>
+    <nav>
+        <span>
+            <a th:href="@{/usuario/dashboard}">
+                <img class="headbangersLogo" src="/images/headbangersLogo.png" alt="Headbangers Cave">
+            </a>
+        </span>
+        <div class="navbarBotones">
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/usuario/dashboard}">Volver</a>
+            </button>
+        </div>
+    </nav>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/estilos.css">
-    </head>
-    <body>
-        <nav>
-            <span>
-                <a th:href="@{/usuario/dashboard}">
-                    <img class="headbangersLogo" src="/images/headbangersLogo.png" alt="Headbangers Cave">
-                </a>
-            </span>
-            <div class="navbarBotones">
-                <button class="btn btn-warning">
-                    <a class="text-decoration-none text-dark" th:href="@{/usuario/dashboard}">Volver</a>
-                </button>
-            </div>
-        </nav>
-
-        <div th:each="usuario:${usuarios}" class="publicacionTarjeta">
-            <div class="card bg-black mt-1">
+    <div class="scroll">
+        <div th:each="usuario:${usuarios}">
+            <div class="card bg-black m-3">
                 <div class="card-body">
                     <div th:if="${usuario.imagen == null}">
-                        <img class="publicacionTarjeta" style="width: 30%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                        <img class="publicacionTarjeta" style="max-width: 30%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
                     </div>
                     <div th:unless="${usuario.imagen == null}">
                         <a th:href="@{/usuario/perfil/__${usuario.id}__}">
@@ -49,6 +46,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
-    </body>
+</body>
 </html>

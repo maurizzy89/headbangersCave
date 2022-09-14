@@ -2,92 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Headbangers Cave - Publicaciones</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/estilos.css">
-    </head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Headbangers Cave - Publicaciones</title>
+</head>
 
-    <body>
-        <nav>
-            <span sec:authorize="isAnonymous()">
-                <a th:href="@{/publicaciones}">
-                    <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
-                </a>
-            </span>
-            <span sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                <a th:href="@{/usuario/dashboard}">
-                    <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
-                </a>
-            </span>
+<body>
+    <nav>
+        <span sec:authorize="isAnonymous()">
+            <a th:href="@{/publicaciones}">
+                <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
+            </a>
+        </span>
+        <span sec:authorize="hasAnyRole('USER','ADMIN')">
+            <a th:href="@{/usuario/dashboard}">
+                <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
+            </a>
+        </span>
 
-            <div style="text-align: center" class="navbarBotones">
-                <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                    <a class="text-decoration-none text-dark" th:href="@{/crear}">Crear Publicacion</a>
-                </button>
-                <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
-                    <a class="text-decoration-none text-dark" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')'" th:href="@{/usuario/perfil/__${id}__}"></a>
-                </button>
-                <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
-                    <a class="text-decoration-none text-dark" th:href="@{/lista_usuarios}">Miembros Registrados</a>
-                </button>
-                <button class="btn btn-warning" sec:authorize="isAnonymous()">
-                    <a class="text-decoration-none text-dark" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
-                </button>
-                <button class="btn btn-warning" sec:authorize="isAnonymous()">
-                    <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
-                </button>
-                <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                    <a class="text-decoration-none text-dark" th:href="@{/logout}">Logout</a>
-                </button>
+        <div style="text-align: center" class="navbarBotones">
+            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                <a class="text-decoration-none text-dark" th:href="@{/crear}">Crear Publicacion</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
+                <a class="text-decoration-none text-dark" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')'" th:href="@{/usuario/perfil/__${id}__}"></a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
+                <a class="text-decoration-none text-dark" th:href="@{/lista_usuarios}">Miembros Registrados</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="isAnonymous()">
+                <a class="text-decoration-none text-dark" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="isAnonymous()">
+                <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
+            </button>
+            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                <a class="text-decoration-none text-dark" th:href="@{/logout}">Logout</a>
+            </button>
 
-            </div>
-        </nav>
-
-        <div th:if="${exito != null}" class="card text-white bg-transparent mb-3 mt-3 mensajeExito">
-            <div class="card-body">
-                <h5 class="card-title">Exito</h5>
-                <p class="card-text" th:text="${exito}"></p>
-            </div>
         </div>
-        <div class="scroll">
-            <div class="row mx-3">
-                <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
-                    <div class="card bg-black" id='tarjeta'>
-                        <div class="card-body">
-                            <div th:if="${publicacion.creador.imagen == null}">
-                                <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
-                                    <img class="publicacionTarjeta" style="width: 140px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
-                                </a>
-                            </div>
-                            <div th:unless="${publicacion.creador.imagen == null}">
-                                <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
-                                    <img class="publicacionImagen" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 140px" align='right'>
-                                </a>
-                            </div>
-                            <h3 th:text="${publicacion.creador.nombreu}"></h3>
-                            <small th:text="${publicacion.fecha}"></small>
+    </nav>
 
-                            <h4 th:text="${publicacion.titulo}"></h4>
-                            <h5 th:text="${publicacion.comentario}"></h5>
-                            <a class="btn btn-light"  th:href="@{${publicacion.link}}" target="_blank">Ir al enlace</a>
-                            <br>
+    <div th:replace="fragments/exito.html"></div>
 
-                            <span sec:authorize="hasAnyRole('USER')">
-                                <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Editar Publicación</a>
-                                <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Eliminar Publicación</a>
-                            </span>
-                            <span sec:authorize="hasAnyRole('ADMIN')">
-                                <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark">Editar Publicación</a>
-                                <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger">Eliminar Publicación</a>
-                            </span>
+    <div class="scroll">
+        <div class="row mx-3">
+            <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
+                <div class="card bg-black" id='tarjeta'>
+                    <div class="card-body">
+                        <div th:if="${publicacion.creador.imagen == null}">
+                            <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
+                                <img class="publicacionTarjeta" style="width: 140px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                            </a>
                         </div>
+                        <div th:unless="${publicacion.creador.imagen == null}">
+                            <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
+                                <img class="publicacionImagen" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 140px" align='right'>
+                            </a>
+                        </div>
+                        <h3 th:text="${publicacion.creador.nombreu}"></h3>
+                        <small th:text="${publicacion.fecha}"></small>
+
+                        <h4 th:text="${publicacion.titulo}"></h4>
+                        <h5 th:text="${publicacion.comentario}"></h5>
+                        <a class="btn btn-light"  th:href="@{${publicacion.link}}" target="_blank">Ir al enlace</a>
+                        <br>
+
+                        <span sec:authorize="hasAnyRole('USER')">
+                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Editar Publicación</a>
+                            <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Eliminar Publicación</a>
+                        </span>
+                        <span sec:authorize="hasAnyRole('ADMIN')">
+                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark">Editar Publicación</a>
+                            <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger">Eliminar Publicación</a>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>

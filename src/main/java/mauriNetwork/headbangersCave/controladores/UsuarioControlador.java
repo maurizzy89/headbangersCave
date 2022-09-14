@@ -89,7 +89,11 @@ public class UsuarioControlador {
         try {
             BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
             if (bi == null) {
-                return "registro.html";
+                modelo.put("error", "No cargaste ninguna imagen ");
+                modelo.put("usuario", usuarioServicio.getReferenceById(id));
+                List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
+                modelo.addAttribute("publicaciones", publicaciones);
+                return "perfil.html";
             }
             Map result = cloudinaryService.upload(multipartFile);
             Imagen imagen
@@ -99,13 +103,12 @@ public class UsuarioControlador {
             imagenService.save(imagen);
 
             usuarioServicio.modificarImagenDePerfil(id, imagen);
-            modelo.put("exitoImagen", "La imagen de perfil fue cambiada");
+            modelo.put("exito", "La imagen de perfil fue cambiada");
             modelo.put("usuario", usuarioServicio.getReferenceById(id));
             List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
             return "perfil.html";
         } catch (IOException e) {
-            modelo.put("errorImagen", "No cargaste ninguna imagen ");
             modelo.put("usuario", usuarioServicio.getReferenceById(id));
             List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
@@ -119,13 +122,13 @@ public class UsuarioControlador {
         try {
             usuarioServicio.modificarNombreDeUsuario(id, nombreu);
             logueado.setNombreu(nombreu);
-            modelo.put("exitoNombre", "El nombre de usuario fue cambiado");
+            modelo.put("exito", "El nombre de usuario fue cambiado");
             modelo.put("usuario", usuarioServicio.getReferenceById(logueado.getId()));
             List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
             return "perfil.html";
         } catch (Exception e) {
-            modelo.put("errorNombre", "El nombre de usuario que pusiste ya esta en uso");
+            modelo.put("error", "El nombre de usuario que pusiste ya esta en uso");
             modelo.put("usuario", usuarioServicio.getReferenceById(logueado.getId()));
             List<Publicacion> publicaciones = usuarioServicio.listarPublicacionesPorCreador(id);
             modelo.addAttribute("publicaciones", publicaciones);
