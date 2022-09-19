@@ -98,7 +98,7 @@ public class UsuarioControlador {
             Map result = cloudinaryService.upload(multipartFile);
             Imagen imagen
                     = new Imagen(result.get("original_filename").toString(),
-                            result.get("url").toString(),
+                            imagenService.modificarURL(result.get("url").toString()),
                             result.get("public_id").toString());
             imagenService.save(imagen);
 

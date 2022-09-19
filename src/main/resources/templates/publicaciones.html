@@ -42,7 +42,7 @@
         </div>
     </nav>
 
-    <div th:replace="fragments/exito.html"></div>
+    <div style="display: inline-block" th:replace="fragments/exito.html"></div>
 
     <div class="scroll">
         <div class="row mx-3">
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <div th:if="${publicacion.creador.imagen == null}">
                             <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
-                                <img class="publicacionTarjeta" style="width: 140px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                                <img class="publicacionImagen" style="width: 140px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
                             </a>
                         </div>
                         <div th:unless="${publicacion.creador.imagen == null}">
@@ -59,13 +59,13 @@
                                 <img class="publicacionImagen" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 140px" align='right'>
                             </a>
                         </div>
-                        <h3 th:text="${publicacion.creador.nombreu}"></h3>
-                        <small th:text="${publicacion.fecha}"></small>
+                        <h3 style="margin-bottom: 0px; color: chocolate; font-weight: bold; font-family: string" th:text="${publicacion.creador.nombreu}"></h3>
+                        <small style="color: grey;" th:text="${publicacion.fecha}"></small>
 
-                        <h4 th:text="${publicacion.titulo}"></h4>
-                        <h5 th:text="${publicacion.comentario}"></h5>
-                        <a class="btn btn-light"  th:href="@{${publicacion.link}}" target="_blank">Ir al enlace</a>
-                        <br>
+
+                        <h5 style="margin-top: 30px;" th:text="${publicacion.titulo}"></h5>
+                        <h6 style="color: burlywood;" th:text="${publicacion.comentario}"></h6>
+                        <a class="btn btn-light"  th:href="@{${publicacion.link}}" target="_blank">Ver Publicación</a>
 
                         <span sec:authorize="hasAnyRole('USER')">
                             <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Editar Publicación</a>

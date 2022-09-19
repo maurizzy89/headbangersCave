@@ -30,4 +30,20 @@ public class ImagenService {
         return imagenRepositorio.existsById(id);
     }
 
+    public String modificarURL(String urlImagen) {
+        String[] urlDividida = urlImagen.split("/");
+        String urlNueva = "";
+
+        for (int i = 0; i < urlDividida.length; i++) {
+            if (i == 5) {
+                urlDividida[i] = urlDividida[i] + "/c_fill,f_auto,h_500,q_100:444,w_500";
+            }
+            if (i != urlDividida.length - 1) {
+                urlNueva = urlNueva + urlDividida[i] + "/";
+            } else {
+                urlNueva = urlNueva + urlDividida[i];
+            }
+        }
+        return urlNueva;
+    }
 }

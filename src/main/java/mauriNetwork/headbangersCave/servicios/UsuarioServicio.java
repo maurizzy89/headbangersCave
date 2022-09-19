@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import mauriNetwork.headbangersCave.entidades.Imagen;
@@ -92,11 +93,16 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     private void validar(String nombreu, String password, String password2) throws MyException {
-        if (nombreu.isEmpty() || nombreu == null) {
+        boolean nombreValidacion = Pattern.matches("(\\s+)", nombreu);
+
+        if (nombreu.isEmpty()) {
             throw new MyException("El nombre no puede estar vacio");
         }
+        if (nombreValidacion == true) {
+            throw new MyException("El nombre no puede tener solo espacios");
+        }
         if (password.isEmpty() || password == null || password.length() <= 5) {
-            throw new MyException("La contraseña no puede estar vacia y debe tener mas de 5 digitos");
+            throw new MyException("La contraseña no puede estar vacia y debe tener al menos 6 digitos");
         }
         if (password.isEmpty() || !password2.equals(password)) {
             throw new MyException("Debe repetir la contraseña y ambas deben coincidir");

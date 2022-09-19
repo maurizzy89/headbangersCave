@@ -7,6 +7,8 @@ import mauriNetwork.headbangersCave.excepciones.MyException;
 import mauriNetwork.headbangersCave.servicios.PublicacionServicio;
 import mauriNetwork.headbangersCave.servicios.UsuarioServicio;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -72,7 +74,7 @@ public class PortalControlador {
             Map result = cloudinaryService.upload(multipartFile);
             Imagen imagen
                     = new Imagen(result.get("original_filename").toString(),
-                            result.get("url").toString(),
+                            imagenService.modificarURL(result.get("url").toString()),
                             result.get("public_id").toString());
             imagenService.save(imagen);
             usuarioServicio.guardarUsuario(nombreu, password, password2, imagen);
@@ -106,7 +108,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/guardar_creada")
-    public String guardarCreada(Publicacion publicacion, HttpSession session, @RequestParam(name = "titulo") String titulo, @RequestParam(name = "comentario") String comentario, @RequestParam(name = "link") String link, ModelMap modelo) throws MyException, IOException {
+    public String guardarCreada(Publicacion publicacion, HttpSession session, @RequestParam(name = "titulo") String titulo, @RequestParam(name = "comentario") String comentario, @RequestParam(name = "link") String link, ModelMap modelo) throws MyException, IOException, URISyntaxException {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         try {
@@ -124,7 +126,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/guardar_editada")
-    public String guardarEditada(Publicacion publicacion, HttpSession session, @RequestParam(name = "titulo") String titulo, @RequestParam(name = "comentario") String comentario, @RequestParam(name = "link") String link, ModelMap modelo) throws MyException, IOException {
+    public String guardarEditada(Publicacion publicacion, HttpSession session, @RequestParam(name = "titulo") String titulo, @RequestParam(name = "comentario") String comentario, @RequestParam(name = "link") String link, ModelMap modelo) throws MyException, IOException, MalformedURLException, URISyntaxException {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         try {

@@ -1,5 +1,8 @@
 package mauriNetwork.headbangersCave.servicios;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import mauriNetwork.headbangersCave.entidades.Publicacion;
 import mauriNetwork.headbangersCave.excepciones.MyException;
 import mauriNetwork.headbangersCave.repositorio.UsuarioRepositorio;
@@ -22,7 +25,7 @@ public class PublicacionServicio {
     private UsuarioRepositorio usuarioRepositorio;
 
     @Transactional    //se pone cuando el metodo hace alguna transaccion en la BD si el metodo se ejecuta bien, se realiza un commit a la BD y se aplican los cambios, si da algun error se hace un rollback (se vuelve atras) y no se aplica nada
-    public Publicacion crearPublicacion(String titulo, String comentario, String link, String nombreLogueado) throws MyException {
+    public Publicacion crearPublicacion(String titulo, String comentario, String link, String nombreLogueado) throws MyException, URISyntaxException, MalformedURLException {
         validar(titulo, comentario, link);
 
         Publicacion publicacion = new Publicacion();
@@ -63,7 +66,7 @@ public class PublicacionServicio {
         }
     }
 
-    public void editarPublicacion(Long id, String titulo, String comentario, String link) throws MyException {
+    public void editarPublicacion(Long id, String titulo, String comentario, String link) throws MyException, MalformedURLException, URISyntaxException {
         validar(titulo, comentario, link);
 
         Optional<Publicacion> respuestaPublicacion = publicacionRepositorio.findById(id);
@@ -98,16 +101,21 @@ public class PublicacionServicio {
         return ultimasPublicaciones;
     }
 
-    public void validar(String titulo, String comentario, String link) throws MyException {
+    public void validar(String titulo, String comentario, String link) throws MyException, MalformedURLException, URISyntaxException {
         if (titulo == null || titulo.isEmpty()) {
             throw new MyException("El titulo no puede estar vacio");
         }
-        if (comentario == null || comentario.isEmpty()) {
-            throw new MyException("El comentario no puede estar vacio");
-        }
+
         if (link == null || link.isEmpty()) {
             throw new MyException("Tenes que poner un link");
+        } else {
+            try {
+                new URL(link).toURI();
+            } catch (MalformedURLException | URISyntaxException e) {
+                throw new MyException("Link no vàlido");
+            }
         }
+
     }
 
     public Publicacion getReferenceById(Long id) {
