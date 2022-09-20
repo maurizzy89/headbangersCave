@@ -7,24 +7,27 @@
 </head>
 
 <body>
+    <span>
+        <a th:href="@{/publicaciones}">
+            <img class="headbangersLogo" src="/images/headbangersLogo.png" alt="Headbangers Cave">
+        </a>
+    </span>
+
     <nav sec:authorize="isAnonymous()">
-        <span>
-            <a th:href="@{/publicaciones}">
-                <img class="headbangersLogo" src="/images/headbangersLogo.png" alt="Headbangers Cave">
-            </a>
-        </span>
-        <div class="navbarBotones">
+        <div style="text-align: center" class="navbarBotones">
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
+            </button>
+            <button class="btn btn-warning">
+                <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
+            </button>
             <button class="btn btn-warning">
                 <a class="text-decoration-none text-dark" th:href="@{/publicaciones}">Volver</a>
             </button>
         </div>
     </nav>
+
     <nav sec:authorize="hasAnyRole('USER','ADMIN')">
-        <span>
-            <a th:href="@{/usuario/dashboard}">
-                <img class="headbangersLogo" src="/images/headbangersLogo.png" alt="Headbangers Cave">
-            </a>
-        </span>
         <div class="navbarBotones">
             <button class="btn btn-warning">
                 <a class="text-decoration-none text-dark" th:href="@{/usuario/dashboard}">Volver</a>
@@ -32,8 +35,8 @@
         </div>
     </nav>
 
-    <div class="reesplandor">
-        <p th:text="${usuario.nombreu}"></p>
+    <div>
+        <p th:text="${usuario.nombreu}" class="titulo"></p>
         <div sec:authorize="hasAnyRole('USER','ADMIN')">
             <form th:action="@{/usuario/modificarNombreDeUsuario/__${usuario.id}__}" method="POST" class="formulario">
                 <div sec:authorize="hasAnyRole('USER')">
@@ -48,86 +51,92 @@
                         <button type="submit" name="modificarNombreDeUsuario" class="btn btn-light mt-3 botones">Modificar</button>
                     </p>
                 </div>
+            </form>
         </div>
-    </form>
-</div>
 
-<div th:replace="fragments/error.html"></div>
-<div th:replace="fragments/exito.html"></div>
+        <div th:replace="fragments/error.html"></div>
+        <div th:replace="fragments/exito.html"></div>
 
-<br>
+        <div style="display: flex">
+            <div th:if="${usuario.imagen == null}">
+                <img src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil" style="border-radius: 200px; width: 300px; margin: 0px 0px 0px 50px">
+            </div>
+            <div th:unless="${usuario.imagen == null}" style="text-align: center; margin: 20px 0px 0px 50px">
+                <a th:href="${usuario.imagen.imagenUrl}">
+                    <img th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="border-radius: 200px; width: 300px; margin-bottom: 10px">
+                </a>
+                
+                <div sec:authorize="hasAnyRole('USER','ADMIN')">
+                    <form th:action="@{/usuario/modificarImagenDePerfil/__${usuario.id}__}" method="POST" enctype="multipart/form-data" class="formulario">
+                        <div sec:authorize="hasAnyRole('USER')">
+                            <p th:if="${session.usuariosession.nombreu == usuario.nombreu}">
+                                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
+                                <button type="submit" name="modificarImagenDePerfil" class="btn btn-light mt-3 botones">Modificar</button>
+                                <span th:unless="${usuario.imagen == null}">
+                                    <button th:if="${session.usuariosession.nombreu == usuario.nombreu}" class="btn btn-light mt-3 botones">
+                                        <a th:href="@{/usuario/borrarImagenDePerfil/__${usuario.id}__}" class="text-decoration-none text-dark" >Eliminar</a>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                        <div sec:authorize="hasAnyRole('ADMIN')">
+                            <p>
+                                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
+                                <button type="submit" name="modificarImagenDePerfil" class="btn btn-light mt-3 botones">Modificar</button>
+                                <span th:unless="${usuario.imagen == null}">
+                                    <button class="btn btn-light mt-3 botones">
+                                        <a th:href="@{/usuario/borrarImagenDePerfil/__${usuario.id}__}" class="text-decoration-none text-dark" >Eliminar</a>
+                                    </button>
+                                </span>
+                            </p>
+                        </div> 
+                    </form>
+                </div>                
 
-<div th:if="${usuario.imagen == null}">
-    <img src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
-</div>
-<div th:unless="${usuario.imagen == null}">
-    <a th:href="${usuario.imagen.imagenUrl}">
-        <img th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
-    </a>
-</div>
-<div sec:authorize="hasAnyRole('USER','ADMIN')">
-    <form th:action="@{/usuario/modificarImagenDePerfil/__${usuario.id}__}" method="POST" enctype="multipart/form-data" class="formulario">
-        <div sec:authorize="hasAnyRole('USER')">
-            <p th:if="${session.usuariosession.nombreu == usuario.nombreu}">
-                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
-                <button type="submit" name="modificarImagenDePerfil" class="btn btn-light mt-3 botones">Modificar</button>
-                <span th:unless="${usuario.imagen == null}">
-                    <button th:if="${session.usuariosession.nombreu == usuario.nombreu}" class="btn btn-light mt-3 botones">
-                        <a th:href="@{/usuario/borrarImagenDePerfil/__${usuario.id}__}" class="text-decoration-none text-dark" >Eliminar</a>
-                    </button>
-                </span>
-            </p>
-        </div>
-        <div sec:authorize="hasAnyRole('ADMIN')">
-            <p>
-                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
-                <button type="submit" name="modificarImagenDePerfil" class="btn btn-light mt-3 botones">Modificar</button>
-                <span th:unless="${usuario.imagen == null}">
-                    <button class="btn btn-light mt-3 botones">
-                        <a th:href="@{/usuario/borrarImagenDePerfil/__${usuario.id}__}" class="text-decoration-none text-dark" >Eliminar</a>
-                    </button>
-                </span>
-            </p>
-        </div> 
-    </form>
-</div>
+                <p class="reesplandor" th:text="'Miembro desde: ' + ${usuario.fechalta}"></p>
+                <p class="reesplandor" th:text="'Rol: ' + ${usuario.rol}"></p>
 
-<p th:text="'Miembro desde: ' + ${usuario.fechalta}"></p>
-<p th:text="'Rol: ' + ${usuario.rol}"></p>
+            </div>
 
+            <div style="width: 100%">
+                <p class="reesplandor" style="text-align: center; font-weight: bold">Publicaciones Hechas </p>
+                <div class="scroll" id="scroll-perfil">
+                    <div class="row mx-3">
+                        <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta" style="width: 60%; margin-top: 12px">
+                            <div class="card bg-black" id='tarjeta' style="margin-left: 60px">
+                                <div class="card-body">
+                                    <div th:if="${publicacion.creador.imagen == null}">
+                                        <img class="publicacionImagen" style="width: 30%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                                    </div>
+                                    <div th:unless="${publicacion.creador.imagen == null}">
+                                        <img class="publicacionImagen" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
+                                    </div>
+                                    <h3 style="margin-bottom: 0px; color: chocolate; font-weight: bold; font-family: string" th:text="${publicacion.creador.nombreu}"></h3>
+                                    <h6 style="color: grey;" th:text="${publicacion.fecha}"></h6>                           
 
-<p>Publicaciones</p>
-<div class="row mx-5">
-    <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
-        <div class="card bg-black mt-1">
-            <div class="card-body">
-                <div th:if="${publicacion.creador.imagen == null}">
-                    <img class="publicacionTarjeta" style="width: 30%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                                    <h5 style="margin-top: 30px;" th:text="${publicacion.titulo}"></h5>
+                                    <h6 style="color: burlywood;" th:text="${publicacion.comentario}"></h6>
+                                    <button class="btn btn-light">
+                                        <a class="text-decoration-none text-dark" th:href="@{${publicacion.link}}" target="_blank">Ver Publicación</a>
+                                    </button>
+                                    <span sec:authorize="hasAnyRole('USER')">
+                                        <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Editar</a>
+                                        <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Eliminar</a>
+                                    </span>
+                                    <span sec:authorize="hasAnyRole('ADMIN')">
+                                        <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark">Editar</a>
+                                        <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger">Eliminar</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div th:unless="${publicacion.creador.imagen == null}">
-                    <img th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 30%" align='right'>
-                </div>
-                <h3 th:text="${publicacion.creador.nombreu}"></h3>
-                <h6 th:text="${publicacion.fecha}"></h6>                           
-
-                <h3 th:text="${publicacion.titulo}"></h3>
-                <h5 th:text="${publicacion.comentario}"></h5>
-                <button class="btn btn-warning">
-                    <a class="text-decoration-none text-dark" th:href="@{${publicacion.link}}" target="_blank">Ir al enlace</a>
-                </button>
-                <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-secondary"
-                   sec:authorize="hasAnyRole('ADMIN')">Editar Publicación</a><br>
-                <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" sec:authorize="hasRole('ADMIN')">Eliminar
-                    Publicación</a><br>
             </div>
         </div>
     </div>
-</div>
 
-</div>
-<div class="footer">
-    <p>Copyright • Todos los derechos reservados • 2022</p>
-</div>
+    <div th:replace="fragments/footer.html"></div>
 </body>
 
 </html>

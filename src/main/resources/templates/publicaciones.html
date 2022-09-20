@@ -38,17 +38,16 @@
             <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
                 <a class="text-decoration-none text-dark" th:href="@{/logout}">Logout</a>
             </button>
-
         </div>
     </nav>
 
-    <div style="display: inline-block" th:replace="fragments/exito.html"></div>
+    <div style="display: frex" th:replace="fragments/exito.html"></div>
 
     <div class="scroll">
         <div class="row mx-3">
-            <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
+            <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta" style='padding-bottom: 15px;'>
                 <div class="card bg-black" id='tarjeta'>
-                    <div class="card-body">
+                    <div class="card-body" >
                         <div th:if="${publicacion.creador.imagen == null}">
                             <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
                                 <img class="publicacionImagen" style="width: 140px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
@@ -68,18 +67,19 @@
                         <a class="btn btn-light"  th:href="@{${publicacion.link}}" target="_blank">Ver Publicación</a>
 
                         <span sec:authorize="hasAnyRole('USER')">
-                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Editar Publicación</a>
-                            <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Eliminar Publicación</a>
+                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark"  th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Editar</a>
+                            <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger" th:if="${session.usuariosession.nombreu == publicacion.creador.nombreu}">Eliminar</a>
                         </span>
                         <span sec:authorize="hasAnyRole('ADMIN')">
-                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark">Editar Publicación</a>
-                            <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger">Eliminar Publicación</a>
+                            <a th:href="@{/editar/__${publicacion.id}__}" class="btn btn-dark">Editar</a>
+                            <a th:href="@{/__${publicacion.id}__}" class="btn btn-danger">Eliminar</a>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+       <div th:replace="fragments/footer.html"></div>
 </body>
-
 </html>
