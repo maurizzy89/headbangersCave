@@ -24,28 +24,29 @@
         <form th:action="@{/registro}" method="POST" enctype="multipart/form-data" class="formulario">
 
             <div class="form-group my-3">
-                <h3 class="reesplandor">Registrate</h3>
+                <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 20px 0px 0px 10px">Registrate y demostrá tu estilo</p>
             </div>
 
             <div class="form-group my-3">
                 <input type="text" class="form-control" placeholder="Nombre de Usuario" name="nombreu"
-                       th:value="${nombreu}">
+                       th:value="${nombreu}" style="width: 60%; margin-left: 10px">
             </div>
             <div class="form-group my-3">
-                <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                <input type="password" class="form-control" placeholder="Contraseña" name="password" style="width: 60%; margin: 0px 0px 0px 10px">
             </div>
             <div class="form-group my-3">
-                <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2">
+                <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2" style="width: 60%; margin: 0px 0px 0px 10px">
             </div>
             <div class="form-group my-3">
-                <input type="file" class="form-control" placeholder="sube tu foto de perfil" name="multipartFile">
+                <p class="reesplandor" style="text-align: left; margin: 0px 0px 0px 10px; font-size: 15px">Imagen de Perfil</p>
+                <input type="file" class="form-control-plaintext" name="multipartFile" style="width: 60%; margin-left: 10px">
             </div>       
-            <button type="submit" name="registro" class="btn btn-light mt-3 botones">Registrarme</button>
+            <button type="submit" name="registro" class="btn btn-dark" style="width: 60%; margin: 0px 0px 0px 10px">Registrarme</button>
         </form>
         <br>
-    <div th:replace="fragments/error.html"></div>
+        <div th:replace="fragments/error.html"></div>
     </div>
-    
+
     <div th:replace="fragments/footer.html"></div>
 </body>
 </html>

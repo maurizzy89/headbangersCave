@@ -24,26 +24,19 @@
         <form th:action="@{/logincheck}" method="POST" class="formulario">
 
             <div class="form-group my-3">
-                <h3 class="reesplandor">Accede y publicá tu musica</h3>
+    <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 20px 0px 0px 5px">Accede y publicá un tema que nos vuele la cabeza a todxs!</p>
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" placeholder="Nombre de Usuario" name="nombreu"
-                       th:value="${nombreu}">
+                <input type="text" class="form-control" placeholder="Nombre de Usuario" name="nombreu" th:value="${nombreu}" style="width: 60%; margin-left: 10px">
             </div>
             <div class="form-group my-3">
-                <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                <input type="password" class="form-control" placeholder="Contraseña" name="password" style="width: 60%; margin-left: 10px">
             </div>
-            <button type="submit" class="btn btn-light mt-3 botones">Entrar</button>
-
+            <button type="submit" class="btn btn-dark" style="width: 60%; margin-left: 10px">Entrar</button>
         </form>
-        <br>
-    <div th:replace="fragments/head.html"></div>
 
     </div>
-    <div class="footer">
-        <p>Copyright • Todos los derechos reservados • 2022</p>
-    </div>
-    
-        <div th:replace="fragments/footer.html"></div>
+
+    <div th:replace="fragments/footer.html"></div>
 </body>
 </html>

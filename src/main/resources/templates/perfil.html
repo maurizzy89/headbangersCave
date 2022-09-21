@@ -42,7 +42,7 @@
                 <div sec:authorize="hasAnyRole('USER')">
                     <p th:if="${session.usuariosession.nombreu == usuario.nombreu}">
                         <input type="text" class="form-control" placeholder="modificar tu nombre de usuario" name="nombreu" style="width: 69%; margin-left: 10px">
-                        <button type="submit" name="modificarNombreDeUsuario" class="btn btn-light mt-3 botones">Modificar</button>
+                        <button type="submit" name="modificarNombreDeUsuario" class="btn btn-light mt-1 botones">Modificar</button>
                     </p>
                 </div>
                 <div sec:authorize="hasAnyRole('ADMIN')">
