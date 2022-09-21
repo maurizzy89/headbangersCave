@@ -1,0 +1,21 @@
+<form th:action="@{/guardar_creada}" method="POST" enctype="multipart/form-data" th:object="${publicacion}">
+
+    <input type="hidden" name="id" th:field="*{id}">
+
+    <div class="form-group" style="width: 60%; margin-left: 10px">
+        <input type="text" class="form-control" placeholder="Titulo" name="titulo" th:field="*{titulo}">
+    </div>
+
+    <div class="form-group" style="width: 60%; margin-left: 10px">
+        <textarea class="form-control" placeholder="Comentario" name="comentario" th:field="*{comentario}"></textarea>
+    </div>
+
+    <div class="form-group" style="width: 60%; margin-left: 10px">
+        <input type="text" class="form-control" placeholder="Tu link" name="link" th:field="*{link}">
+    </div>
+
+    <button type="submit" name="guardar" class="btn btn-dark" style="margin-left: 10px">Guardar</button>
+
+    <div th:replace="fragments/error.html"></div>
+
+</form>

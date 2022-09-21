@@ -18,37 +18,9 @@
         </div>
     </nav>
 
-    <h2 class="reesplandor">Editar Publicacion</h2>
-    <br>
-    <div>
-        <form th:action="@{/guardar_editada}" method="POST" enctype="multipart/form-data" th:object="${publicacion}">
+    <h2 class="reesplandor" style="margin: 20px 0px 5px 10px">Editar Publicacion</h2>
 
-            <input type="hidden" name="id" th:field="*{id}">
-
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Titulo" name="titulo" th:field="*{titulo}">
-            </div>
-
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Comentario" name="comentario" th:field="*{comentario}"></textarea>
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Tu link" name="link" th:field="*{link}">
-            </div>
-
-            <button type="submit" name="guardar" class="btn btn-primary">Guardar edición</button>
-
-            <br>
-            <br>
-
-            <div th:if="${error != null}" class="card text-white bg-transparent mb-3 mensajeError">
-                <div class="card-body">
-                    <h5 class="card-title">Error</h5>
-                    <p class="card-text" th:text="${error}"></p>
-                </div>
-            </div>
-        </form>
+    <div th:replace="fragments/formulario.html"></div>
 
     <div th:replace="fragments/footer.html"></div>
 </body>
