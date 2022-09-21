@@ -1,0 +1,27 @@
+<div sec:authorize="hasAnyRole('USER','ADMIN')">
+    <form th:action="@{/usuario/modificarImagenDePerfil/__${usuario.id}__}" method="POST" enctype="multipart/form-data" class="formulario">
+        <div sec:authorize="hasAnyRole('USER')">
+            <p th:if="${session.usuariosession.nombreu == usuario.nombreu}">
+                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
+                <button type="submit" name="modificarImagenDePerfil" class="btn btn-dark mt-1 botones">Modificar</button>
+                <span th:unless="${usuario.imagen == null}">
+                    <button th:if="${session.usuariosession.nombreu == usuario.nombreu}" class="btn btn-danger mt-1 botones">
+                        <a th:href="@{/usuario/borrarImagenDePerfil/__${usuario.id}__}" class="text-decoration-none text-dark" >Eliminar</a>
+                    </button>
+                </span>
+            </p>
+        </div>
+        
+        <div sec:authorize="hasAnyRole('ADMIN')">
+            <p>
+                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
+                <button type="submit" name="modificarImagenDePerfil" class="btn btn-dark mt-1 botones">Modificar</button>
+                <span th:unless="${usuario.imagen == null}">
+                    <button class="btn btn-danger mt-1 botones">
+                        <a th:href="@{/usuario/borrarImagenDePerfil/__${usuario.id}__}" class="text-decoration-none text-dark" >Eliminar</a>
+                    </button>
+                </span>
+            </p>
+        </div> 
+    </form>
+</div>                
