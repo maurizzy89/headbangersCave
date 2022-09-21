@@ -34,35 +34,37 @@
             </button>
         </div>
     </nav>
-
-    <div>
+    
+    <div th:replace="fragments/error.html"></div>
+    <div th:replace="fragments/exito.html"></div>
+    
+    <div style="width: 69%">
         <p th:text="${usuario.nombreu}" class="titulo"></p>
-        <div sec:authorize="hasAnyRole('USER','ADMIN')">
+        <div sec:authorize="hasAnyRole('USER','ADMIN')" style="margin: 0px">
             <form th:action="@{/usuario/modificarNombreDeUsuario/__${usuario.id}__}" method="POST" class="formulario">
                 <div sec:authorize="hasAnyRole('USER')">
-                    <p th:if="${session.usuariosession.nombreu == usuario.nombreu}">
-                        <input type="text" class="form-control" placeholder="modificar tu nombre de usuario" name="nombreu" style="width: 69%; margin-left: 10px">
+                    <p th:if="${session.usuariosession.nombreu == usuario.nombreu}" >
+                        <input type="text" class="form-control" placeholder="modificar tu nombre de usuario" name="nombreu" style="margin-left: 10px; width: 96.5%">
                         <button type="submit" name="modificarNombreDeUsuario" class="btn btn-light mt-1 botones">Modificar</button>
                     </p>
                 </div>
                 <div sec:authorize="hasAnyRole('ADMIN')">
                     <p>
-                        <input type="text" class="form-control" placeholder="modifica tu nombre de usuario" name="nombreu" style="width: 69%; margin-left: 10px">
+                        <input type="text" class="form-control" placeholder="modifica tu nombre de usuario" name="nombreu" style="margin-left: 10px; width: 96.5%">
                         <button type="submit" name="modificarNombreDeUsuario" class="btn btn-dark mt-1 botones" style="margin-left: 10px">Modificar</button>
                     </p>
                 </div>
             </form>
         </div>
 
-        <div th:replace="fragments/error.html"></div>
-        <div th:replace="fragments/exito.html"></div>
-
         <div style="display: flex">
-            <div th:if="${usuario.imagen == null}">
-                <img src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil" style="border-radius: 200px; width: 300px; margin: 0px 0px 0px 50px">
+            <div th:if="${usuario.imagen == null}" style="text-align: center">
+                <img src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil" style="border-radius: 200px; width: 70%">
                 <div th:replace="fragments/modificar_o_eliminar_imagen_perfil.html"></div>
+                <p class="reesplandor" th:text="'Miembro desde: ' + ${usuario.fechalta}"></p>
+                <p class="reesplandor" th:text="'Rol: ' + ${usuario.rol}"></p>
             </div>
-            
+
             <div th:unless="${usuario.imagen == null}" style="text-align: center; margin: 20px 0px 0px 50px">
                 <a th:href="${usuario.imagen.imagenUrl}">
                     <img th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="border-radius: 200px; width: 300px; margin-bottom: 10px">
@@ -73,12 +75,13 @@
                 <p class="reesplandor" th:text="'Rol: ' + ${usuario.rol}"></p>
             </div>
 
-            <div style="width: 100%">
+            <div>
                 <p class="reesplandor" style="text-align: center; font-weight: bold"><u>Publicaciones Hechas</u></p>
+                
                 <div class="scroll" id="scroll-perfil">
                     <div class="row mx-3">
-                        <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta" style="width: 60%; margin-top: 12px">
-                            <div class="card bg-black" id='tarjeta' style="margin-left: 60px">
+                        <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta" style="margin-top: 10px">
+                            <div class="card bg-black" id='tarjeta' style="margin-left: 10px">
                                 <div class="card-body">
                                     <div th:if="${publicacion.creador.imagen == null}">
                                         <img class="publicacionImagen" style="width: 30%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">

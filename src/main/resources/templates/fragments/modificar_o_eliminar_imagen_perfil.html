@@ -2,7 +2,7 @@
     <form th:action="@{/usuario/modificarImagenDePerfil/__${usuario.id}__}" method="POST" enctype="multipart/form-data" class="formulario">
         <div sec:authorize="hasAnyRole('USER')">
             <p th:if="${session.usuariosession.nombreu == usuario.nombreu}">
-                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
+                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile" style="margin-left:90px">
                 <button type="submit" name="modificarImagenDePerfil" class="btn btn-dark mt-1 botones">Modificar</button>
                 <span th:unless="${usuario.imagen == null}">
                     <button th:if="${session.usuariosession.nombreu == usuario.nombreu}" class="btn btn-danger mt-1 botones">
@@ -14,7 +14,7 @@
         
         <div sec:authorize="hasAnyRole('ADMIN')">
             <p>
-                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile">
+                <input type="file" class="form-control-plaintext" placeholder="modifica tu foto de perfil" name="multipartFile" style="margin-left:90px">
                 <button type="submit" name="modificarImagenDePerfil" class="btn btn-dark mt-1 botones">Modificar</button>
                 <span th:unless="${usuario.imagen == null}">
                     <button class="btn btn-danger mt-1 botones">
