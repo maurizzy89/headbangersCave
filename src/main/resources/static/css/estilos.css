@@ -40,6 +40,8 @@ body{
         0 0 50px red,
         0 0 75px red,
         0 0 100px red;
+    padding-right: 5px;
+
 }
 
 .reesplandor {
@@ -68,6 +70,7 @@ body{
 }
 
 .publicacionTarjeta {
+    width:100%;
     border-radius: 20px;
     color:white;
     font-family:cursive;
@@ -103,12 +106,13 @@ body{
     height: 636px;
 }
 #scroll-perfil{
-    padding-top: 0px;
+    padding-top:0px;
     float:right;
     width: 100%;
 }
 #scroll-lista{
     width: 60%;
+
 }
 
 .scroll::-webkit-scrollbar{

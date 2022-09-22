@@ -24,7 +24,7 @@
                 <a class="text-decoration-none text-dark" th:href="@{/crear}">Crear Publicacion</a>
             </button>
             <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
-                <a class="text-decoration-none text-dark" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')'" th:href="@{/usuario/perfil/__${id}__}"></a>
+                <a class="text-decoration-none text-dark" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')' " th:href="@{/usuario/perfil/__${id}__}"></a>
             </button>
             <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
                 <a class="text-decoration-none text-dark" th:href="@{/lista_usuarios}">Miembros Registrados</a>
