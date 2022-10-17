@@ -34,51 +34,50 @@
             </button>
         </div>
     </nav>
-    
+
     <div th:replace="fragments/error.html"></div>
     <div th:replace="fragments/exito.html"></div>
-    
-    <div style="width: 69%">
+
+    <div style="width: 800px">
         <p th:text="${usuario.nombreu}" class="titulo"></p>
         <div sec:authorize="hasAnyRole('USER','ADMIN')">
             <form th:action="@{/usuario/modificarNombreDeUsuario/__${usuario.id}__}" method="POST" class="formulario">
                 <div sec:authorize="hasAnyRole('USER')">
                     <p th:if="${session.usuariosession.nombreu == usuario.nombreu}" >
-                        <input type="text" class="form-control" placeholder="modificar tu nombre de usuario" name="nombreu" style="margin-left: 10px; width: 97.5%">
-                        <button type="submit" name="modificarNombreDeUsuario" class="btn btn-dark mt-1" style="margin-left: 10px">Modificar</button>
+                        <input type="text" class="form-control" placeholder="modificar tu nombre de usuario" name="nombreu" style="margin-left: 30px; ; width:320px">
+                        <button type="submit" name="modificarNombreDeUsuario" class="btn btn-dark mt-1" style="margin-left: 30px; width:320px">Modificar</button>
                     </p>
                 </div>
                 <div sec:authorize="hasAnyRole('ADMIN')">
                     <p>
-                        <input type="text" class="form-control" placeholder="modifica tu nombre de usuario" name="nombreu" style="margin-left: 10px; width: 97.5%">
-                        <button type="submit" name="modificarNombreDeUsuario" class="btn btn-dark mt-1" style="margin-left: 10px">Modificar</button>
+                        <input type="text" class="form-control" placeholder="modifica tu nombre de usuario" name="nombreu" style="margin-left: 30px; ; width:320px">
+                        <button type="submit" name="modificarNombreDeUsuario" class="btn btn-dark mt-1" style="margin-left: 30px; ; width:320px">Modificar</button>
                     </p>
                 </div>
             </form>
         </div>
 
-        <div style="display: flex">
-            <div th:if="${usuario.imagen == null}" style="text-align: center">
-                <img src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil" style="border-radius: 200px; width: 70%; margin-bottom: 10px">
+        <div class="flex">
+            <div th:if="${usuario.imagen == null}">
+                <img src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil" style="border-radius: 200px; width: 70%; margin: 0 0 10px 40px">
                 <div th:replace="fragments/modificar_o_eliminar_imagen_perfil.html"></div>
                 <p class="reesplandor" th:text="'Miembro desde: ' + ${usuario.fechalta}"></p>
                 <p class="reesplandor" th:text="'Rol: ' + ${usuario.rol}"></p>
             </div>
 
-            <div th:unless="${usuario.imagen == null}" style="text-align: center">
-                <a th:href="${usuario.imagen.imagenUrl}" style="text-align: center">
-                    <img th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="border-radius: 200px; width: 70%; margin-bottom: 10px">
+            <div th:unless="${usuario.imagen == null}">
+                <a th:href="${usuario.imagen.imagenUrl}">
+                    <img th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="border-radius: 200px; width: 70%; margin: 0 0 10px 40px">
                 </a>
                 <div th:replace="fragments/modificar_o_eliminar_imagen_perfil.html"></div>
 
-                <p class="reesplandor" th:text="'Miembro desde: ' + ${usuario.fechalta}"></p>
-                <p class="reesplandor" th:text="'Rol: ' + ${usuario.rol}"></p>
+                <p class="reesplandor" th:text="'Miembro desde: ' + ${usuario.fechalta}" style="margin-left:50px"></p>
+                <p class="reesplandor" th:text="'Rol: ' + ${usuario.rol}" style="margin-left:50px"></p>
             </div>
-
+            
             <div style="width: 60%">
-                <p class="reesplandor" style="text-align: center; font-weight: bold"><u>Publicaciones Hechas</u></p>
-                
                 <div class="scroll" id="scroll-perfil">
+                    <p class="reesplandor" style="text-align: center; font-weight: bold; margin-top:20px;"><u>Publicaciones Hechas</u></p>
                     <div class="row mx-3">
                         <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta" style="margin-top: 10px">
                             <div class="card bg-black" id='tarjeta' style="margin-left: 10px">

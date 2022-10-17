@@ -18,12 +18,12 @@
             </button>
         </div>
     </nav>
-    <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 20px 0px 0px 5px">Lista de Headbangers</p>
+    <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 10px 0px 0px 5px">Lista de Headbangers</p>
 
-    <div class="scroll" id="scroll-lista">
+    <div class="scroll">
         <div class="row mx-3">
-            <div th:each="usuario:${usuarios}">
-                <div class="card bg-black m-2" id='tarjeta'>
+            <div th:each="usuario:${usuarios}" class="publicacionTarjeta">
+                <div class="card bg-black" id='tarjeta'>
                     <div class="card-body">
                         <div th:if="${usuario.imagen == null}">
                             <img class="publicacionTarjeta" style="width: 20%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">

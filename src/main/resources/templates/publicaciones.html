@@ -20,7 +20,7 @@
         </span>
 
         <div style="text-align: center" class="navbarBotones">
-            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+            <button class="btn btn-warning m-1" sec:authorize="hasAnyRole('USER', 'ADMIN')">
                 <a class="text-decoration-none text-dark" th:href="@{/crear}">Crear Publicacion</a>
             </button>
             <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
@@ -41,16 +41,15 @@
         </div>
     </nav>
 
-    <div style="display: frex" th:replace="fragments/exito.html"></div>
-    
-    <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 20px 0px 0px 5px">Últimas Publicaciones</p>
+    <div th:replace="fragments/exito.html"></div>
+
+    <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 10px 0px 0px 10px">Últimas Publicaciones</p>
 
     <div class="scroll">
         <div class="row mx-3">
-            <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta" style='padding-bottom: 15px;'>
+            <div th:each="publicacion:${publicaciones}" class="publicacionTarjeta">
                 <div class="card bg-black" id='tarjeta'>
                     <div class="card-body" >
-                        
                         <div th:if="${publicacion.creador.imagen == null}">
                             <a th:href="@{/usuario/perfil/__${publicacion.creador.id}__}">
                                 <img class="publicacionImagen" style="width: 140px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
@@ -61,7 +60,7 @@
                                 <img class="publicacionImagen" th:src="${publicacion.creador.imagen.imagenUrl}" alt='foto de perfil' style="width: 140px" align='right'>
                             </a>
                         </div>
-                        
+
                         <h3 style="margin-bottom: 0px; color: chocolate; font-weight: bold; font-family: string" th:text="${publicacion.creador.nombreu}"></h3>
                         <small style="color: grey;" th:text="${publicacion.fecha}"></small>
 
