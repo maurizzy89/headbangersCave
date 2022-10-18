@@ -40,7 +40,7 @@
                         <button style="margin-top: 0px" class="btn btn-warning">
                             <a class="text-decoration-none text-dark" th:href="@{/usuario/perfil/__${usuario.id}__}" >Ver Perfil</a>
                         </button>
-                        <button style="margin-top: 65px" class="btn btn-danger" sec:authorize="hasAnyRole('USER')" th:if="${session.usuariosession.nombreu == usuario.nombreu}">
+                        <button style="margin-top: 0px" class="btn btn-danger" sec:authorize="hasAnyRole('USER')" th:if="${session.usuariosession.nombreu == usuario.nombreu}">
                             <a class="text-decoration-none text-dark" th:href="@{/admin/eliminar_usuario/__${usuario.id}__}">Eliminar Usuario</a>
                         </button>
                         <button style="margin-top: 0px" class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN')">
