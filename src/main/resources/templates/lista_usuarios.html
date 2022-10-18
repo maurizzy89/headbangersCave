@@ -26,24 +26,24 @@
                 <div class="card bg-black" id='tarjeta'>
                     <div class="card-body">
                         <div th:if="${usuario.imagen == null}">
-                            <img class="publicacionTarjeta" style="width: 20%" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
+                            <img class="publicacionTarjeta" style="width: 130px" align='right' src="/images/sin_imagen_de_perfil.jpg" alt="usuario sin imagen de perfil">
                         </div>
                         <div th:unless="${usuario.imagen == null}">
                             <a th:href="@{/usuario/perfil/__${usuario.id}__}">
-                                <img class="publicacionTarjeta" th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="width: 20%" align='right'>
+                                <img class="publicacionTarjeta" th:src="${usuario.imagen.imagenUrl}" alt='foto de perfil' style="width: 130px" align='right'>
                             </a>
                         </div>
 
                         <h3 th:text="${usuario.nombreu}" style="margin-bottom: 0px; color: chocolate; font-weight: bold; font-family: string"></h3>
                         <h6 th:text="'Miembro desde ' + ${usuario.fechalta}" style="color: grey"></h6>  
 
-                        <button style="margin-top: 65px" class="btn btn-warning">
+                        <button style="margin-top: 0px" class="btn btn-warning">
                             <a class="text-decoration-none text-dark" th:href="@{/usuario/perfil/__${usuario.id}__}" >Ver Perfil</a>
                         </button>
                         <button style="margin-top: 65px" class="btn btn-danger" sec:authorize="hasAnyRole('USER')" th:if="${session.usuariosession.nombreu == usuario.nombreu}">
                             <a class="text-decoration-none text-dark" th:href="@{/admin/eliminar_usuario/__${usuario.id}__}">Eliminar Usuario</a>
                         </button>
-                        <button style="margin-top: 65px" class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN')">
+                        <button style="margin-top: 0px" class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN')">
                             <a class="text-decoration-none text-dark" th:href="@{/admin/eliminar_usuario/__${usuario.id}__}">Eliminar Usuario</a>
                         </button>
                     </div>
