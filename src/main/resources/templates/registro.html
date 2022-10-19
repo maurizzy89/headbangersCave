@@ -13,16 +13,14 @@
                 <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
             </a>
         </span>
-        <div class="navbarBotones">
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" th:href="@{/publicaciones}">Volver</a>
-            </button>
-        </div>
+        <ul class="nav">
+            <li><a class="btn btn-warning m-1" th:href="@{/publicaciones}">Volver</a>
+            </li>
+        </ul>
     </nav>
 
     <div>
         <form th:action="@{/registro}" method="POST" enctype="multipart/form-data" class="formulario">
-
             <div class="form-group my-3">
                 <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 20px 0px 0px 10px">Registrate y demostrá tu estilo</p>
             </div>

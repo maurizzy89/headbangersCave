@@ -7,39 +7,41 @@
 </head>
 
 <body>
-    <nav>
-        <span sec:authorize="isAnonymous()">
-            <a th:href="@{/publicaciones}">
-                <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
-            </a>
-        </span>
-        <span sec:authorize="hasAnyRole('USER','ADMIN')">
-            <a th:href="@{/usuario/dashboard}">
-                <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
-            </a>
-        </span>
+    <span sec:authorize="isAnonymous()">
+        <a th:href="@{/publicaciones}">
+            <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
+        </a>
+    </span>
+    <span sec:authorize="hasAnyRole('USER','ADMIN')">
+        <a th:href="@{/usuario/dashboard}">
+            <img class="headbangersLogo" src="../images/headbangersLogo.png" alt="Headbangers Cave">
+        </a>
+    </span>
 
-        <div style="text-align: center" class="navbarBotones">
-            <button class="btn btn-warning m-1" sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                <a class="text-decoration-none text-dark" th:href="@{/crear}">Crear Publicacion</a>
-            </button>
-            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
-                <a class="text-decoration-none text-dark" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')' " th:href="@{/usuario/perfil/__${id}__}"></a>
-            </button>
-            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER','ADMIN')">
-                <a class="text-decoration-none text-dark" th:href="@{/lista_usuarios}">Miembros Registrados</a>
-            </button>
-            <button class="btn btn-warning" sec:authorize="isAnonymous()">
-                <a class="text-decoration-none text-dark" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
-            </button>
-            <button class="btn btn-warning" sec:authorize="isAnonymous()">
-                <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
-            </button>
-            <button class="btn btn-warning" sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                <a class="text-decoration-none text-dark" th:href="@{/logout}">Logout</a>
-            </button>
-        </div>
-    </nav>
+    <ul class="nav">
+        <li><a class="btn btn-warning m-1">Menu</a>
+            <ul>
+                <li sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                        <a class="btn btn-warning"  th:href="@{/crear}">Crear Publicacion</a>
+                </li>    
+                <li sec:authorize="hasAnyRole('USER','ADMIN')">
+                    <a class="btn btn-warning" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')' " th:href="@{/usuario/perfil/__${id}__}"></a>
+                </li>    
+                <li sec:authorize="hasAnyRole('USER','ADMIN')">
+                        <a class="btn btn-warning" th:href="@{/lista_usuarios}">Miembros Registrados</a>
+                </li>    
+                <li sec:authorize="isAnonymous()">
+                        <a class="btn btn-warning" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
+                </li>    
+                <li sec:authorize="isAnonymous()">
+                        <a class="btn btn-warning" th:href="@{/login}">Login</a>
+                </li>    
+                <li sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                        <a class="btn btn-warning" th:href="@{/logout}">Logout</a>
+                </li>    
+            </ul>
+        </li>
+    </ul>
 
     <div th:replace="fragments/exito.html"></div>
 

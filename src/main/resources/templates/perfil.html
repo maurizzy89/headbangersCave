@@ -14,25 +14,22 @@
     </span>
 
     <nav sec:authorize="isAnonymous()">
-        <div style="text-align: center" class="navbarBotones">
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
-            </button>
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" th:href="@{/login}">Login</a>
-            </button>
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" th:href="@{/publicaciones}">Volver</a>
-            </button>
-        </div>
+        <ul class="nav">
+            <li><a class="btn btn-warning m-1">Menu</a>
+                <ul>
+                    <li><a class="btn btn-warning" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a></li>
+                    <li><a cclass="btn btn-warning" th:href="@{/login}">Login</a></li>
+                    <li><a class="btn btn-warning" th:href="@{/publicaciones}">Volver</a></li>
+                </ul>
+            </li>
+        </ul>
     </nav>
 
     <nav sec:authorize="hasAnyRole('USER','ADMIN')">
-        <div class="navbarBotones">
-            <button class="btn btn-warning">
-                <a class="text-decoration-none text-dark" th:href="@{/usuario/dashboard}">Volver</a>
-            </button>
-        </div>
+        <ul class="nav">
+            <li><a class="btn btn-warning m-1" th:href="@{/usuario/dashboard}">Volver</a>
+            </li>
+        </ul>
     </nav>
 
     <div th:replace="fragments/error.html"></div>
