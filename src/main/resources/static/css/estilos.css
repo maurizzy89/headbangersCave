@@ -227,6 +227,6 @@ ul, ol{
     }
 
     .temblor:hover{
-        -webkit-animation: animar 1s 10;
+        -webkit-animation: animar 2s 10;
     }
 }
