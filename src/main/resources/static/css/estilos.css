@@ -12,13 +12,12 @@ body{
 }
 .texto{
     margin-right: 35px;
-    -webkit-text-stroke: 1px red;
     display:flex;
     float:right;
     clear: both;
     width:40%;
     text-align: center;
-    color: yellow;
+    color: burlywood;
 }
 #texto1{
     margin-top: 55px;
@@ -232,8 +231,7 @@ ul, ol{
         float:right;
         clear: both;
         width:95%;
-        margin-top:0px;
-        margin-bottom:15px;
+        margin:auto;
     }
     #texto1{
         margin-top: 5px;
