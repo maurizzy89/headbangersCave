@@ -22,22 +22,22 @@
         <li><a class="btn btn-warning m-1">Menu</a>
             <ul>
                 <li sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                        <a class="btn btn-warning"  th:href="@{/crear}">Crear Publicacion</a>
+                    <a class="btn btn-warning"  th:href="@{/crear}">Crear Publicacion</a>
                 </li>    
                 <li sec:authorize="hasAnyRole('USER','ADMIN')">
                     <a class="btn btn-warning" th:text="'Tu Perfil (' + ${session.usuariosession.nombreu} + ')' " th:href="@{/usuario/perfil/__${id}__}"></a>
                 </li>    
                 <li sec:authorize="hasAnyRole('USER','ADMIN')">
-                        <a class="btn btn-warning" th:href="@{/lista_usuarios}">Miembros Registrados</a>
+                    <a class="btn btn-warning" th:href="@{/lista_usuarios}">Miembros Registrados</a>
                 </li>    
                 <li sec:authorize="isAnonymous()">
-                        <a class="btn btn-warning" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
+                    <a class="btn btn-warning" sec:authorize="isAnonymous()"th:href="@{/registrar}">Registrate</a>
                 </li>    
                 <li sec:authorize="isAnonymous()">
-                        <a class="btn btn-warning" th:href="@{/login}">Login</a>
+                    <a class="btn btn-warning" th:href="@{/login}">Login</a>
                 </li>    
                 <li sec:authorize="hasAnyRole('USER', 'ADMIN')">
-                        <a class="btn btn-warning" th:href="@{/logout}">Logout</a>
+                    <a class="btn btn-warning" th:href="@{/logout}">Logout</a>
                 </li>    
             </ul>
         </li>
@@ -45,6 +45,17 @@
 
     <div th:replace="fragments/exito.html"></div>
 
+        <div class="reesplandor">
+        <h2 class="texto" id="texto1">
+            <center>Bienvenidx a Headbangers Cave!</center>
+        </h2>
+        <h3 class="texto" id="texto2"> 
+           Un espacio musical abierto a todas las personas melómanas que gozan al revolear los cabellos en cualquier momento y lugar para luego descansar en la oscuridad de un misterioso arpegio acolchado con solos orgásmicos y voces melódicas!
+           <br>Este es tu sitio para compartir ese tema o video que tantas veces repetiste y no dejó de girar en tu cabeza.
+           <br>Un paraje de la Web donde podras documentar tu enigmatico hallazgo para revivirlo cuando quieras!
+        </h3>
+    </div>
+    
     <p class="reesplandor" style="text-align: left; font-weight: bold; margin: 10px 0px 0px 10px">Últimas Publicaciones</p>
 
     <div class="scroll">
@@ -85,6 +96,7 @@
         </div>
     </div>
 
+    
     <div th:replace="fragments/footer.html"></div>
 </body>
 </html>

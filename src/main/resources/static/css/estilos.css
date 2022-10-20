@@ -10,7 +10,27 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+.texto{
+    margin-right: 35px;
+    -webkit-text-stroke: 1px red;
+    display:flex;
+    float:right;
+    clear: both;
+    width:40%;
+    text-align: center;
+    color: yellow;
+}
+#texto1{
+    margin-top: 55px;
+    color:black;
+}
+#texto2{
+    text-shadow:
+        0 0 5px black,
+        0 0 15px black,
+        0 0 30px black,
+        0 0 50px black;
+}
 .titulo{
     text-align: center;
     color: darkred;
@@ -97,14 +117,14 @@ body{
 
 .logoBienvenida{
     margin-top: 70px;
-    margin-left: 5px;
+    margin-left: 0px;
     width: 35%;
 }
 
 .scroll{
     margin-top: 105px;
     overflow-y: scroll;
-    width: 800px;
+    width: 55%;
     position: absolute;
     top:0;
     bottom:0;
@@ -173,7 +193,6 @@ ul, ol{
         right:0;
     }
     .scroll{
-
         overflow-y: scroll;
         width:100%;
         position: static;
@@ -208,25 +227,38 @@ ul, ol{
         margin: 0px;
         clear:both;
     }
-
-
-    .temblor{
+    .texto{
+        display:inline;
+        float:right;
+        clear: both;
+        width:95%;
+        margin-top:0px;
+        margin-bottom:15px;
     }
-    @-webkit-keyframes animar{
-        0%{-webkit-transform:translate(0px,0px);}
-        10%{-webkit-transform:translate(40px,20px);}
-        20%{-webkit-transform:translate(0px,0px);}
-        30%{-webkit-transform:translate(40px,20px);}
-        40%{-webkit-transform:translate(0px,0px);}
-        50%{-webkit-transform:translate(40px,20px);}
-        60%{-webkit-transform:translate(0px,0px);}
-        70%{-webkit-transform:translate(40px,20px);}
-        80%{-webkit-transform:translate(0px,0px);}
-        90%{-webkit-transform:translate(40px,20px);}
-        100%{-webkit-transform:translate(0px,0px);}
+    #texto1{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 22px;
+        color:black;
     }
+}
 
-    .temblor:hover{
-        -webkit-animation: animar 2s 10;
-    }
+.temblor{
+}
+@-webkit-keyframes animar{
+    0%{-webkit-transform:translate(0px,0px);}
+    10%{-webkit-transform:translate(0px,40px);}
+    20%{-webkit-transform:translate(0px,0px);}
+    30%{-webkit-transform:translate(0px,20px);}
+    40%{-webkit-transform:translate(0px,0px);}
+    50%{-webkit-transform:translate(0px,40px);}
+    60%{-webkit-transform:translate(0px,0px);}
+    70%{-webkit-transform:translate(0px,20px);}
+    80%{-webkit-transform:translate(0px,0px);}
+    90%{-webkit-transform:translate(0px,40px);}
+    100%{-webkit-transform:translate(0px,0px);}
+}
+
+.temblor:hover{
+    -webkit-animation: animar 1s 10;
 }
