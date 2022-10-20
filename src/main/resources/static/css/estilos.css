@@ -16,7 +16,7 @@ body{
     float:right;
     clear: both;
     width:40%;
-    text-align: center;
+    text-align: justify;
     color: burlywood;
 }
 #texto1{
@@ -227,22 +227,20 @@ ul, ol{
         clear:both;
     }
     .texto{
-        display:inline;
+        text-align: center;
         float:right;
         clear: both;
         width:95%;
-        margin:auto;
+        margin:5px 10px 15px 15px;
     }
     #texto1{
         margin-top: 5px;
         margin-bottom: 5px;
-        font-size: 22px;
         color:black;
     }
+
 }
 
-.temblor{
-}
 @-webkit-keyframes animar{
     0%{-webkit-transform:translate(0px,0px);}
     10%{-webkit-transform:translate(0px,40px);}
