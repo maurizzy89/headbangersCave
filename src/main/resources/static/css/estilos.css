@@ -227,7 +227,7 @@ ul, ol{
         clear:both;
     }
     .texto{
-        text-align: center;
+        text-align: left;
         float:right;
         clear: both;
         width:95%;
